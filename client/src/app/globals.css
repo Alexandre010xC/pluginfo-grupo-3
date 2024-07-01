@@ -1,0 +1,102 @@
+/* Zen Antique Soft */
+@font-face {
+  font-family: "Zen Antique Soft";
+  src: url("../fonts/Zen_Antique_Soft/ZenAntiqueSoft-Regular.ttf") format('truetype');
+}
+
+/* Antic Didone */
+@font-face {
+  font-family: "Antic Didone";
+  src: url("../fonts/Antic_Didone/AnticDidone-Regular.ttf") format('truetype');
+}
+
+:root {
+  --font-mono: "Zen Antique Soft", "Antic Didone", sans-serif;
+
+  --font-color:#000000;
+  --background:#ffffff;
+
+  --lilas-50:  #fbf7fc;
+  --lilas-100: #f8eef9;
+  --lilas-200: #efdcf2;
+  --lilas-300: #e0b6e4;
+  --lilas-400: #d499d9;
+  --lilas-500: #be71c4;
+  --lilas-600: #a352a7;
+  --lilas-700: #87418a;
+  --lilas-800: #713771;
+  --lilas-900: #5e315d;
+  --lilas-950: #3b173b;
+
+  --cinza-50:  #f9f8f7;
+  --cinza-100: #f1f0ef;
+  --cinza-200: #e7e3e1;
+  --cinza-300: #dcd7d5;
+  --cinza-400: #bbb2ae;
+  --cinza-500: #a29691;
+  --cinza-600: #8a7d78;
+  --cinza-700: #726763;
+  --cinza-800: #605754;
+  --cinza-900: #534c49;
+  --cinza-950: #2a2625;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  color: var(--font-color);
+  background-color: var(--background);
+}
+
+html,
+body {
+  max-width: 100vw;
+  height: auto;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 16px;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 4rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.5rem;
+}
+h4 {
+  font-size: 2.25rem;
+}
+h5 {
+  font-size: 2rem;
+}
+h6 {
+  font-size: 1.5rem;
+}
+small {
+  font-size: 0.8125rem;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
