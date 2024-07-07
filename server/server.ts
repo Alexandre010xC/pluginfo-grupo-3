@@ -53,22 +53,22 @@ app.get("/get_product/:id", async (req: Request, res: Response) => {
 })
 
 app.post("/create_product", async (req: Request, res: Response) => {
-  const { name, brand, price, desc, tags, img_src, color } = req.body
+  const { name, brand, price, description, tags, image_source, color } = req.body
   try {
     const product = await prisma.product.create({
       data: {
         name: name,
         brand: brand,
         price: parseFloat(price),
-        description: desc,
+        description: description,
         tags: tags,
-        image_source: img_src,
+        image_source: image_source,
         color: color
       }
     })
     res.send({
       message: "product added succesfully",
-      product: product,
+      product: product
     });
   } catch (error: any) {
       console.error("Erro ao criar produto:", error);
@@ -79,8 +79,8 @@ app.post("/create_product", async (req: Request, res: Response) => {
 
 })
 
-app.post("/edit_product", async (req: Request, res: Response) => {
-  const { name, brand, price, desc, tags, img_src, color, id } = req.body
+app.put("/edit_product", async (req: Request, res: Response) => {
+  const { name, brand, price, description, tags, image_source, color, id } = req.body
   try {
     const product = await prisma.product.update({
       where: {
@@ -90,9 +90,9 @@ app.post("/edit_product", async (req: Request, res: Response) => {
         name: name,
         brand: brand,
         price: parseFloat(price),
-        description: desc,
+        description: description,
         tags: tags,
-        image_source: img_src,
+        image_source: image_source,
         color: color
       }
     })
