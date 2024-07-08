@@ -33,7 +33,8 @@ app.get("/get_products", async (req: Request, res: Response) => {
 
 app.get("/filter_products", async (req: Request, res: Response) => {
 
-  const { name, tags} = req.body
+  const name:any = req.query.name
+  const tags:any = req.query.name
   try {
     
   const products = await prisma.product.findMany({
