@@ -1,0 +1,23 @@
+.productCard,
+.otherInfo {
+  display: flex;
+}
+
+.productCard {
+  flex-direction: column;
+  width: 312px;
+  height: 459px;
+  gap: 8px;
+}
+
+.otherInfo {
+  justify-content: space-between;
+}
+
+.favoriteIcon {
+  cursor: pointer;
+}
+
+.price {
+  font-size: 24px;
+}
