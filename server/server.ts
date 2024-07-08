@@ -31,6 +31,40 @@ app.get("/get_products", async (req: Request, res: Response) => {
   }
 })
 
+app.get("/filter_products", async (req: Request, res: Response) => {
+
+  const { name, tags} = req.body
+  try {
+    
+  const products = await prisma.product.findMany({
+        where: {
+          AND: [
+            {
+              name: {
+                contains: name,
+              },
+            },
+            {
+              tags: {
+                contains: tags,
+              },
+            },
+          ],
+        },
+      });
+
+    res.send({
+      message: "products retrieved succesfully",
+      products: products,
+    });
+  } catch (error: any) {
+      console.error("Erro ao listar produtos", error);
+      res.send({
+        message: "error when getting product list",
+      });
+  }
+})
+
 app.get("/get_product/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
 
