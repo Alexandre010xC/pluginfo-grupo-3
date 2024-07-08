@@ -47,7 +47,7 @@
   margin: 0;
   font-family: var(--font-mono);
   color: var(--font-color);
-  background-color: var(--background);
+  /* background-color: var(--background); */
 }
 
 html,
@@ -63,6 +63,10 @@ html {
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   font-weight: normal;
+}
+
+main {
+  padding: 64px 108px 0;
 }
 
 h1 {
@@ -99,4 +103,8 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+button {
+  border: none;
 }
