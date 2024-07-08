@@ -5,9 +5,12 @@ import { createClient } from "@/prismicio";
 import styles from './page.module.css'
 import { PrismicNextImage } from "@prismicio/next";
 
+import ProductLineCard from "./components/ProductLineCard";
 import ProductCard from "./components/ProductCard";
 
 import axios from 'axios';
+
+import esmaltesImage from '../../public/mock/esmaltes.png';
 
 import corretivoImage from '../../public/mock/corretivo.png';
 import esponjaImage from '../../public/mock/esponja.png';
@@ -26,7 +29,7 @@ export default async function Home() {
   // }
 
   return (
-    <>
+    <div className={styles.mainContent}>
       <section className={styles.banner}>
         <div className={styles.content}>
           <h3>{banner.data.title}</h3>
@@ -43,7 +46,11 @@ export default async function Home() {
         <div className={styles.heading}>
           <h4>Confira também</h4>
         </div>
-        
+        <div className={styles.product_list}>
+          <ProductLineCard image={esmaltesImage} name={name} />
+          <ProductLineCard image={esmaltesImage} name={name} />
+          <ProductLineCard image={esmaltesImage} name={name} />
+        </div>
       </section>
 
       <section className={styles.products}>
@@ -57,7 +64,7 @@ export default async function Home() {
           <ProductCard image={corretivoImage} name={name} description={description} price={price} />
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
