@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import styles from './CreatePage.module.css';
-import { Products, axiosInstance } from '../../../service/Products';
+import { axiosInstance } from '../../../service/Products';
 
 const CreatePage = () => {
   //imagens
@@ -14,13 +14,15 @@ const CreatePage = () => {
   const handleMainProduct = (event: ChangeEvent<HTMLInputElement>) => {
     const product = event.target.files ? event.target.files[0] : null;
     if (product) {
-      setMainProduct(product);
-
       const reader = new FileReader();
       reader.readAsDataURL(product);
       reader.onloadend = () => {
         setMainPreview(reader.result as string);
+        
+        setImage_source(prevSources => [product.name, ...prevSources.filter(source => source !== product.name)]);
       };
+  
+      setMainProduct(product);
     }
   };
 
@@ -119,7 +121,6 @@ const CreatePage = () => {
 
   const handleMainProductChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleMainProduct(e);
-    setImage_source([]);
   };
 
   const handleSecondProductChange = (e: ChangeEvent<HTMLInputElement>) => {
