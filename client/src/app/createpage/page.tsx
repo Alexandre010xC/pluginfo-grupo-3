@@ -175,7 +175,7 @@ const CreatePage = () => {
           <label htmlFor="preco" className={styles.formLabel}>Preço</label>
           <div className={styles.inputWrapper}>
             <span className={styles.currency}>R$</span>
-            <input type="number" id="preco" min='0' className={styles.formInputPreco} onChange={(e) => setPrice(parseFloat(e.target.value))} value={price}/>
+            <input type="text" id="preco" min='0' className={styles.formInputPreco} onChange={(e) => setPrice(parseFloat(e.target.value))} value={price}/>
           </div>
 
           <label htmlFor="descricao" className={styles.formLabel}>Descrição</label>
