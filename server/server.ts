@@ -32,9 +32,10 @@ app.get("/get_products", async (req: Request, res: Response) => {
 })
 
 app.get("/filter_products", async (req: Request, res: Response) => {
+  const name: string | undefined = req.query.name as string | undefined;
+  const tags: string | undefined = req.query.tags as string | undefined;
+  const quantity: number | undefined = req.query.quantity ? parseInt(req.query.quantity as string, 10) : undefined;
 
-  const name:any = req.query.name
-  const tags:any = req.query.tags
   try {
     
   const products = await prisma.product.findMany({
@@ -52,6 +53,7 @@ app.get("/filter_products", async (req: Request, res: Response) => {
             },
           ],
         },
+        take: quantity || undefined,
       });
 
     res.send({
