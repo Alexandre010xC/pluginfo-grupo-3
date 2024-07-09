@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Image, { ImageProps } from "next/image";
 import styles from './ProductCard.module.css';
 
@@ -19,7 +18,7 @@ const ProductCard: React.FC<ProductCardProp> = ({image, name, description, price
 
   return (
     <div className={styles.productCard}>
-      <Image src={image} alt={name} />
+      <Image className={styles.image} src={image} alt={name} width={312} height={328} />
       <div>
         <h6>{name}</h6>
         <p>{description}</p>

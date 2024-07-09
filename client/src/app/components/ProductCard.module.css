@@ -10,6 +10,11 @@
   gap: 8px;
 }
 
+.image {
+  width: 100%;
+  height: auto;
+}
+
 .otherInfo {
   justify-content: space-between;
 }
