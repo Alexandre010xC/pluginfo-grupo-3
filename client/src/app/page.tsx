@@ -2,8 +2,10 @@ import { Metadata } from "next";
 import { PrismicRichText } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
-import styles from './page.module.css'
 import { PrismicNextImage } from "@prismicio/next";
+
+import styles from './page.module.css'
+import Link from "next/link";
 
 import ProductLineCard from "./components/ProductLineCard";
 import ProductCard from "./components/ProductCard";
@@ -20,6 +22,7 @@ export default async function Home() {
   const client = createClient();
   const banner = await client.getSingle("home");
 
+  const id = 1;
   const name = "Fenty Beauty";
   const description = "CORRETIVO FENTY INSTANT RETOUCH CONCEALER";
   const price = 130;
@@ -56,12 +59,12 @@ export default async function Home() {
       <section className={styles.products}>
         <div className={styles.heading}>
           <h4>Produtos</h4>
-          <span>Ver mais</span>
+          <Link href="/products"><span>Ver mais</span></Link>
         </div>
         <div className={styles.product_list}>
-          <ProductCard image={corretivoImage} name={name} description={description} price={price} />
-          <ProductCard image={corretivoImage} name={name} description={description} price={price} />
-          <ProductCard image={corretivoImage} name={name} description={description} price={price} />
+          <ProductCard id={id} image={corretivoImage} name={name} description={description} price={price} />
+          <ProductCard id={id} image={corretivoImage} name={name} description={description} price={price} />
+          <ProductCard id={id} image={corretivoImage} name={name} description={description} price={price} />
         </div>
       </section>
     </div>

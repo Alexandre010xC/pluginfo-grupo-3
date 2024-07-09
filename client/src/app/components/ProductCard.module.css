@@ -10,6 +10,10 @@
   gap: 8px;
 }
 
+.description {
+  font-family: 'Antic Didone';
+}
+
 .image {
   width: 100%;
   height: auto;

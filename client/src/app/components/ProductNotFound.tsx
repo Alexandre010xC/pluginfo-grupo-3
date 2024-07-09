@@ -1,18 +1,16 @@
+// app/not-found.tsx
 import Link from 'next/link';
 import Image from "next/image";
 import { FC } from 'react';
 
 import notFountImage from '@/assets/responses/product-not-found.svg'
 
-const NotFound: FC = () => {
+const ProductNotFound: FC = () => {
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>404 - Página não encontrada</h1>
-      <p style={styles.text}>Opa! A página que está procurando não existe.</p>
+      <h1 style={styles.heading}>Produto não encontrado</h1>
+      <p style={styles.text}>Tente verificar a ortografia ou usar termos mais genéricos</p>
       <Image src={notFountImage} alt='página não encontrada' />
-      <Link href="/">
-        <span style={styles.link}>Retornar para o início</span>
-      </Link>
     </div>
   );
 };
@@ -42,4 +40,4 @@ const styles = {
   },
 };
 
-export default NotFound;
+export default ProductNotFound;

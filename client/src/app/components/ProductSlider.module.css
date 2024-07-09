@@ -1,20 +1,5 @@
 .productSlider {
-  width: 80%;
-  margin: auto;
-  padding: 20px;
-}
-
-.productCard {
-  text-align: center;
-  padding: 10px;
-}
-
-.productImage {
-  border-radius: 8px;
-}
-
-.productCard h3 {
-  margin: 10px 0;
+  width: 100%;
 }
 
 .productCard p {

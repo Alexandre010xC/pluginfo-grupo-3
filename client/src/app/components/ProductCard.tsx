@@ -1,16 +1,18 @@
 import Image, { ImageProps } from "next/image";
+import Link from "next/link";
 import styles from './ProductCard.module.css';
 
 import favoriteIcon from '@/assets/utilitary/like.svg'
 
 interface ProductCardProp {
+  id: number,
   image: ImageProps['src'];
   name: string;
   description: string;
   price: number;
 }
 
-const ProductCard: React.FC<ProductCardProp> = ({image, name, description, price}) => {
+const ProductCard: React.FC<ProductCardProp> = ({id, image, name, description, price}) => {
   const formatted_price = new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits:2
@@ -18,10 +20,12 @@ const ProductCard: React.FC<ProductCardProp> = ({image, name, description, price
 
   return (
     <div className={styles.productCard}>
-      <Image className={styles.image} src={image} alt={name} width={312} height={328} />
       <div>
-        <h6>{name}</h6>
-        <p>{description}</p>
+        <Link href={`/product/${id}`}>
+          <Image className={styles.image} src={image} alt={name} width={312} height={328} />
+          <h6>{name}</h6>
+          <p className={styles.description}>{description}</p>
+          </Link>
         <div className={styles.otherInfo}>
           <span className={styles.price}>R${formatted_price}</span>
           <Image className={styles.favoriteIcon} src={favoriteIcon} alt='Salvar como favorito' />

@@ -56,7 +56,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
       <span>N produtos</span>
       <Slider {...settings}>
         {products.map((product) => (
-          <ProductCard image={product.imageUrl} name={product.name} description={product.description} price={product.price} />
+          <ProductCard id={product.id} image={product.imageUrl} name={product.name} description={product.description} price={product.price} />
         ))}
       </Slider>
     </div>
