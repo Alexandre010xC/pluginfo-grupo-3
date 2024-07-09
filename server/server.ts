@@ -168,6 +168,141 @@ app.delete("/delete_product/:id", async (req: Request, res: Response) => {
 
 })
 
+app.put("/add_to_cart/:id", async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id)
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id:id
+      },
+      data: {
+        in_cart: true
+      }
+    })
+    res.send({
+      message: "product added to cart succesfully",
+      product: product,
+    });
+  } catch (error: any) {
+      console.error("Erro ao adicionar produto ao carrinho:", error);
+      res.send({
+        message: "error when adding to cart",
+      });
+  }
+
+})
+
+app.put("/remove_from_cart/:id", async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id)
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id:id
+      },
+      data: {
+        in_cart: false
+      }
+    })
+    res.send({
+      message: "product removed from cart succesfully",
+      product: product,
+    });
+  } catch (error: any) {
+      console.error("Erro ao remover produto do carrinho:", error);
+      res.send({
+        message: "error when removing from cart",
+      });
+  }
+
+})
+
+app.put("/add_to_favorites/:id", async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id)
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id:id
+      },
+      data: {
+        in_favorites: true
+      }
+    })
+    res.send({
+      message: "product added to favorites succesfully",
+      product: product,
+    });
+  } catch (error: any) {
+      console.error("Erro ao adicionar produto aos favoritos:", error);
+      res.send({
+        message: "error when adding to favorites",
+      });
+  }
+
+})
+
+app.put("/remove_from_favorites/:id", async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id)
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id:id
+      },
+      data: {
+        in_favorites: false
+      }
+    })
+    res.send({
+      message: "product removed from favorites succesfully",
+      product: product,
+    });
+  } catch (error: any) {
+      console.error("Erro ao remover produto dos favoritos:", error);
+      res.send({
+        message: "error when removing from favorites",
+      });
+  }
+
+})
+
+app.get("/get_cart", async (req: Request, res: Response) => {
+
+  try {
+    const products = await prisma.product.findMany({
+      where:{
+        in_cart: true
+      }
+    })
+    res.send({
+      message: "cart retrieved succesfully",
+      products: products,
+    });
+  } catch (error: any) {
+      console.error("Erro ao listar carrinho", error);
+      res.send({
+        message: "error when getting cart",
+      });
+  }
+})
+app.get("/get_favorites", async (req: Request, res: Response) => {
+
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        in_favorites: true
+      }
+    })
+    res.send({
+      message: "favorite products retrieved succesfully",
+      products: products,
+    });
+  } catch (error: any) {
+      console.error("Erro ao listar favoritos", error);
+      res.send({
+        message: "error when getting favorites",
+      });
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 })
