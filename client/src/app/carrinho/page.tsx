@@ -24,7 +24,7 @@ const Carrinho = () => {
 
             <div className={styles.valoresIndividuais}>
               <p className={styles.hsix}>Frete</p>
-              <p className={styles.hsix}>R$ 00,00</p>
+              <p className={styles.hsix}>R$</p>
             </div>
 
             <div className={styles.valoresIndividuais}>
@@ -34,7 +34,7 @@ const Carrinho = () => {
 
             <div className={styles.valoresIndividuais}>
               <p className={styles.hsix}>Descontos e adicionais</p>
-              <p className={styles.hsix}>R$ 00,00</p>
+              <p className={styles.hsix}>R$</p>
             </div>
 
             <div className={styles.total}>
