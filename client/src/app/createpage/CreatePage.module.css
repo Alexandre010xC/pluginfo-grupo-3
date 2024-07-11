@@ -1,0 +1,316 @@
+.create{
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.create h4{
+    margin-top: 64px;
+    margin-bottom: 32px;
+    margin-left: 108px;
+}
+
+.createForm{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap:24px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+}
+
+.formLabel{
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+
+    margin-bottom: 8px;
+}
+
+.formInput{
+    width: 448px;
+    height: 57px;
+    border: none;
+    background-color: var(--cinza-300);
+    margin-bottom: 24px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    font-family: Antic Didone;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.formInputMarca{
+    width: 448px;
+    height: 57px;
+    border: none;
+    background-color: var(--cinza-300);
+    margin-bottom: 24px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.formInputDescricao{
+    width: 448px;
+    min-height: 161px;
+    resize: none;
+
+    background-color: var(--cinza-300);
+    border: none;
+    font-family: Antic Didone;
+    font-size: 16px;
+    font-weight: 400;
+
+    margin-bottom: 24px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.inputWrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+  
+.currency {
+    position: absolute;
+    pointer-events: none;
+
+    top:11px;
+    left: 16px;
+
+    color:black;
+    background-color: var(--cinza-300);
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.formInputPreco{
+    width: 220px;
+    height: 57px;
+
+    border: none;
+    background-color: var(--cinza-300);
+
+    margin-bottom: 24px;
+    padding-left: 50px;
+
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.uploadButton{
+    border: none;
+    cursor: pointer;
+    background-color: var(--cinza-300);
+
+    font-size: 29px;
+    font-weight: 700;
+    color: black;
+
+    width: 70px;
+    height: 70px;
+    margin-bottom: 24px;
+}
+
+.variacao {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 24px;
+
+    border: none;
+}
+
+.colorInput{
+    width: 70px;
+    height: 70px;
+
+    border: none;
+    background: none;
+    
+}
+
+.previewImagePrincipal{
+    width: 494px;
+    height: 584px;
+}
+
+.previewImageSecundaria{
+    width: 130px;
+    height: 130px;
+}
+
+.formButton{
+    width: 271px;
+    height: 55px;
+    padding: 10px 30px 10px 30px;
+
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: var(--lilas-400);
+    border: none;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.left{
+    display: flex;
+    flex-direction: row-reverse;
+    gap:16px;
+}
+
+.fotoprincipal{
+    width: 494px;
+    height: 584px;
+}
+
+.uploadButtonPrincipal{
+    border: none;
+    cursor: pointer;
+    background-color: var(--cinza-300);
+
+    font-size: 120px;
+    font-weight: 700;
+    color: black;
+
+    width: 100%;
+    height: 100%;
+}
+
+.fotossecundarias{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+}
+
+.uploadButtonSecundarias{
+    border: none;
+    cursor: pointer;
+    background-color: var(--cinza-300);
+
+    font-size: 59px;
+    font-weight: 700;
+    color: black;
+
+    width: 130px;
+    height: 130px;
+}
+.removeSecondaryButton{
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+@media (max-width: 768px){
+
+    .create{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 32px;
+    }
+
+    .create h4{
+        display: none;
+    }
+
+    .uploadButtonPrincipal{
+        display: none;
+    }
+
+    .uploadButton{
+        width: 40px;
+        height: 40px;
+
+        vertical-align: middle;
+        font-size: 17px;
+    }
+
+    .fotoprincipal{
+        display: none;
+    }
+
+    .createForm{
+        width: 90%;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .right{
+        width: 100%;
+    }
+
+    .formInput{
+        width: 100%;
+        height: 42px;
+        font-size: 13px;
+    }
+
+    .formLabel{
+        font-size: 20px;
+    }
+
+    .formInputMarca{
+        width: 100%;
+        height: 42px;
+        font-size: 20px;
+    }
+
+    .formInputPreco{
+        width: 147px;
+        height: 42px;
+        font-size: 20px;
+    }
+
+    .currency{
+        top:5px;
+        font-size: 20px;
+    }
+
+    .formInputDescricao{
+        width: 100%;
+        height: 149px;
+
+        font-size: 13px;
+    }
+
+    .fotossecundarias {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        column-gap: 24px;
+        row-gap: 20px;
+    
+        border: none;
+    }
+
+    .colorInput{
+        width: 40px;
+        height: 40px;
+    }
+
+    .variacao{
+        gap:16px;
+    }
+
+    .formButton{
+        width: 161px;
+        height: 43px;
+        padding: 10px;
+
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
