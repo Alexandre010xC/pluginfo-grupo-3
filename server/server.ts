@@ -79,7 +79,7 @@ app.post("/create_product", async (req: Request, res: Response) => {
 
 })
 
-app.post("/edit_product", async (req: Request, res: Response) => {
+app.put("/edit_product", async (req: Request, res: Response) => {
   const { name, brand, price, description, tags, image_source, color, id } = req.body
   try {
     const product = await prisma.product.update({
