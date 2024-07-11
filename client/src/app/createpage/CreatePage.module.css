@@ -209,6 +209,11 @@
     width: 130px;
     height: 130px;
 }
+.removeSecondaryButton{
+    cursor: pointer;
+    border: none;
+    background: none;
+}
 
 @media (max-width: 768px){
 

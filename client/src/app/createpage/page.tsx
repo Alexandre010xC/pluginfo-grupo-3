@@ -127,6 +127,32 @@ const CreatePage = () => {
     handleSecondaryProducts(e);
   };
 
+  //deletar imagens
+  const handleRemoveSecondaryImage = (index: number) => {
+    setSecondaryProducts((prevProducts) => {
+      const updatedProducts = [...prevProducts];
+      updatedProducts.splice(index, 1);
+      return updatedProducts;
+    });
+
+    setSecondaryPreviews((prevPreviews) => {
+      const updatedPreviews = [...prevPreviews];
+      updatedPreviews.splice(index, 1);
+      return updatedPreviews;
+    });
+
+    setImage_source((prevSources) => {
+      const updatedSources = [...prevSources];
+      updatedSources.splice(index + 1, 1);
+      return updatedSources;
+    });
+  };
+
+  const handleRemoveMainImage = () => {
+    setMainPreview(null);
+    setMainProduct(null);
+  };
+
   return (
     <section className={styles.create}>
       <h4>Página de criação</h4>
@@ -136,7 +162,7 @@ const CreatePage = () => {
 
           <div className={styles.fotoprincipal}>
             {mainPreview && (
-              <img src={mainPreview} alt="Preview Principal" className={styles.previewImagePrincipal} />
+              <button type="button" className={styles.removeSecondaryButton} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImagePrincipal} /></button>
             )}
             {!mainPreview && (
               <>
@@ -148,8 +174,8 @@ const CreatePage = () => {
 
           <div className={styles.fotossecundarias}>
             {secondaryPreviews.map((preview, index) => (
-              <img key={index} src={preview} alt={`Preview Secundária ${index}`} className={styles.previewImageSecundaria} />
-            ))}
+                <button type="button" className={styles.removeSecondaryButton} key={index} onClick={() => handleRemoveSecondaryImage(index)}><img src={preview} key={index} alt={`Preview Secundária ${index}`} className={styles.previewImageSecundaria} /></button>
+              ))}
             <input type="file" id="secondary-products" accept="image/*" className={styles.formInput} multiple style={{ display: 'none' }} onChange={handleSecondProductChange}/>
             <button type="button" className={styles.uploadButtonSecundarias} onClick={() => document.getElementById('secondary-products')?.click()}> + </button>
           </div>
