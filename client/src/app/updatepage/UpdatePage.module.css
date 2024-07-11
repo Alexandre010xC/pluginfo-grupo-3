@@ -148,9 +148,6 @@
 .previewImageSecundaria{
     width: 130px;
     height: 130px;
-
-    transition: transform 0.3s ease;
-    object-fit: cover;
 }
 
 .formButton{
@@ -197,7 +194,7 @@
 .fotossecundarias{
     display: flex;
     flex-direction: column;
-    gap:24px;
+    gap: 24px;
 }
 
 .uploadButtonSecundarias{
@@ -231,7 +228,33 @@
     cursor: pointer;
     border: none;
     background: none;
+}
 
+.removeSecondaryButtonresponsivo{
+    display: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.uploadButtonSecundariasresponsivo{
+    display: none;
+    border: none;
+    cursor: pointer;
+    background-color: var(--cinza-300);
+
+    font-size: 59px;
+    font-weight: 700;
+    color: black;
+
+    width: 130px;
+    height: 130px;
+}
+.previewImageSecundariaresponsivo{
+    width: 130px;
+    height: 130px;
+
+    display: none;
 }
 
 @media (max-width: 768px){
@@ -331,5 +354,33 @@
 
         font-size: 16px;
         font-weight: 400;
+    }
+
+    .uploadButtonSecundariasresponsivo{
+        display: block;
+        border: none;
+        cursor: pointer;
+        background-color: var(--cinza-300);
+    
+        font-size: 59px;
+        font-weight: 700;
+        color: black;
+    
+        width: 130px;
+        height: 130px;
+    }
+
+    .previewImageSecundariaresponsivo{
+        width: 130px;
+        height: 130px;
+    
+        display: block;
+    }
+
+    .removeSecondaryButtonresponsivo{
+        display: block;
+        cursor: pointer;
+        border: none;
+        background: none;
     }
 }

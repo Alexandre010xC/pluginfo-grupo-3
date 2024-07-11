@@ -124,7 +124,7 @@ const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!name || !price || !brand || !description || !tags || image_source.length === 0 || cores.length === 0) {
+    if (!name || !price || !brand || !description || !tags || image_source.length === 0 || cores.length === 0 || !mainPreview) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
@@ -230,6 +230,15 @@ const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
           </div>
 
           <div className={styles.fotossecundarias}>
+            {mainPreview && (
+              <button type="button" className={styles.removeSecondaryButtonresponsivo} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImageSecundariaresponsivo} /></button>
+            )}
+            {!mainPreview && (
+              <>
+                <input type="file" id="main-product" accept="image/*" className={styles.formInput} style={{ display: 'none' }} onChange={handleMainProductChange} />
+                <button type="button" className={styles.uploadButtonSecundariasresponsivo} onClick={() => document.getElementById('main-product')?.click()}> + </button>
+              </>
+            )}
             {secondaryPreviews.map((preview, index) => (
                 <button type="button" className={styles.removeSecondaryButton} key={index} onClick={() => handleRemoveSecondaryImage(index)}><img src={preview} key={index} alt={`Preview Secundária ${index}`} className={styles.previewImageSecundaria} /></button>
             ))}
