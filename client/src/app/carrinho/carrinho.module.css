@@ -6,10 +6,11 @@
     gap:32px;
 
     width: 100%;
+    padding: 0px;
 }
 
 .itemCarrinhoContainer{
-    width: 1224px;
+    width: 95%;
     height: 294px;
     display: flex;
     justify-content: space-between;

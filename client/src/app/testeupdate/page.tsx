@@ -4,7 +4,7 @@ import UpdatePage from '../updatepage/page';
 
 const TestUpdatePage: React.FC = () => {
   // Simula um ID de produto para testar
-  const testProductId = 28;
+  const testProductId = 1;
 
   return (
     <div>
