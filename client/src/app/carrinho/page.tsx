@@ -1,6 +1,6 @@
 'use client'
 import styles from './Carrinho.module.css';
-import ItemCarrinho from './itemCarrinho';
+import ItemCarrinho from './ItemCarrinho';
 
 const Carrinho = () => {
 
