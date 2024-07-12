@@ -1,0 +1,130 @@
+.products{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+}
+
+.product_list{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 312px;
+    height: 459px;
+
+    cursor: pointer;
+}
+
+.heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+    font-family: 'Antic Didone';
+    height: 48px;
+}
+
+.otherInfo{
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: Zen Antique Soft;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34.75px;
+    text-align: left;
+}
+
+.click{
+    cursor: pointer;
+    font-family: Antic Didone;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 15.47px;
+    text-align: left;
+}
+
+.productCardSumir{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 312px;
+    height: 459px;
+
+    cursor: pointer;
+}
+
+.responsivo{display: none;}
+
+.imageResponsivo{display: none;}
+
+.responsivoOther{display: none;}
+
+@media(max-width: 480px){
+
+    .productCardSumir{
+        display: none;
+    }
+
+    .productCard{
+        width: 134px;
+        height: 240px;
+    }
+
+    .products{
+        width: 90%;
+    }
+
+    .normal{display: none;}
+
+    .responsivo{
+        display: block;
+        font-size: 16px;
+    }
+
+    .responsivoOther{
+        display: block;
+        font-size: 24px;
+    }
+
+    .description {
+        font-size: 13px;
+        height: 45px;
+    }
+
+    .otherInfo{
+        font-size: 16px;
+    }
+
+    .imageResponsivo{display: block;}
+
+    .image{display: none;}
+
+    .favoriteIcon{display: none;}
+
+    .titleResponse{display: none;}
+
+    .click{
+        font-size: 13px;
+    }
+
+    .heading{
+        align-items: flex-end;
+    }
+
+    .product_list{
+        justify-content: space-around;
+    }
+
+}

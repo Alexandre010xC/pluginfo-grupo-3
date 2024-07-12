@@ -4,6 +4,8 @@ import styles from './Carrinho.module.css';
 import ItemCarrinho from './ItemCarrinho';
 import { axiosInstance } from '../../../service/Products';
 import CarrinhoVazio from './CarrinhoVazio';
+import OutrosProdutos from '../components/OutrosProdutos';
+import VistoRecentemente from '../components/VistoRecentemente';
 
 interface Product {
   id: number;
@@ -81,6 +83,8 @@ const Carrinho = () => {
           </div>
         </>
       )}
+        <VistoRecentemente />
+        <OutrosProdutos />
     </main>
   );
 };
