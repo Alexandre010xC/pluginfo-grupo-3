@@ -27,13 +27,19 @@
 
 .information .heading {
   justify-content: space-between;
+/* <<<<<<< Priscila-Anjos */
   flex-direction: row;
+/* ======= */
+/* >>>>>>> tests */
 }
 
 .images {
   gap: 1rem;
 }
+/* <<<<<<< Priscila-Anjos */
 
+/* ======= */
+/* >>>>>>> tests */
 .information {
   width: 542px;
   gap: 16px;
@@ -109,6 +115,7 @@
 .colors .colorItem {
   width: 70px;
   height: 70px;
+/* <<<<<<< Priscila-Anjos */
 }
 
 .mainContent{
@@ -219,4 +226,6 @@
     flex-direction: row;
     text-align: left;
   }
+/* ======= */
+/* >>>>>>> tests */
 }
