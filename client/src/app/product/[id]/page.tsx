@@ -111,7 +111,7 @@ const Product = () => {
               <div className={styles.colors}>
                 {
                   product.color.split(', ').map((color:string) =>
-                    <div className={styles.colorItem} style={{backgroundColor: color}}></div>
+                    <div className={styles.colorItem} key={color} style={{backgroundColor: color}}></div>
                   )
                 }
               </div>
@@ -132,7 +132,7 @@ const Product = () => {
 
         <ItemSemelhantes />
         <OutrosProdutos />
-        
+
       </div>
     );
 }
