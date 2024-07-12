@@ -1,0 +1,110 @@
+.product,
+.information,
+.images,
+.secondaryImages,
+.information .heading,
+.information .main,
+.information .main .heading,
+.information .brandName,
+.colors,
+.about {
+  display: flex;
+}
+
+.product {
+  width: 100%;
+  gap: 40px;
+  justify-content: center;
+}
+
+.information,
+.about,
+.secondaryImages,
+.information .main,
+.information .brandName {
+  flex-direction: column;
+}
+
+.information .heading {
+  justify-content: space-between;
+}
+
+.images {
+  gap: 1rem;
+}
+.information {
+  width: 542px;
+  gap: 16px;
+}
+
+.information .main,
+.information .main .heading {
+  gap: 1.5rem;
+}
+
+.information .brandName {
+  gap: 8px;
+}
+
+.information .name,
+.information .description {
+  font-family: 'Antic Didone';
+}
+
+.information .name {
+  font-size: 2rem;
+}
+
+.information .price {
+  font-size: 2.25rem;
+}
+
+.information .about {
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.information .description {
+  font-size: 20px;
+}
+
+.about .heading {
+  font-size: 1.5rem;
+}
+
+.favoriteIcon, .buyNow {
+  cursor: pointer;
+}
+
+.information .buyNow {
+  width: 265px;
+  height: 55px;
+  padding: 10px 30px;
+  background-color: var(--lilas-400);
+  align-self: center;
+  font-size: 1.5rem;
+}
+
+.secondaryImage {
+  display: block;
+  width: 130px;
+  height: auto;
+}
+
+.primaryImage {
+  width: 494px;
+  height: auto;
+}
+
+.favoriteIcon {
+  width: 40px;
+}
+
+.colors {
+  gap: 1.5rem;
+}
+
+.colors .colorItem {
+  width: 70px;
+  height: 70px;
+}

@@ -61,11 +61,11 @@ app.get("/filter_products", async (req: Request, res: Response) => {
       products: products,
     });
   } catch (error: any) {
-      console.error("Erro ao listar produtos", error);
-      res.send({
-        message: "error when getting product list",
-      });
-  }
+    console.error("Erro ao listar produtos", error);
+    res.send({
+      message: "error when getting product list",
+    });
+}
 })
 
 app.get("/get_product/:id", async (req: Request, res: Response) => {
@@ -77,13 +77,19 @@ app.get("/get_product/:id", async (req: Request, res: Response) => {
         id:id
       }
     })
-    res.send({
+
+    if(!product)
+      return res.status(404).send({
+        message: "product not found",
+      });
+
+    return res.status(200).send({
       message: "product retrieved succesfully",
       product: product
     });
   } catch (error: any) {
       console.error("Erro ao listar o produto", error);
-      res.send({
+      return res.status(500).send({
         message: "error when getting product",
       });
   }
