@@ -104,8 +104,6 @@ input[type=number].inputQuantidade::-webkit-outer-spin-button {
     height: 50px;
 }
 
-
-
 @media(max-width: 480px){
     .carrinhoItens{
         display: flex;
@@ -117,8 +115,10 @@ input[type=number].inputQuantidade::-webkit-outer-spin-button {
         height: auto;
     }
 
-    .tituloResponsivo{
+    h4.tituloResponsivo{
+        margin-top: 32px;
         margin-bottom: 16px;
+        font-size: 24px;
     }
 
     .precoCarrinho{

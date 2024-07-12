@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from "next/image";
 import styles from './HamburgerMenu.module.css';
+import { useRouter } from 'next/navigation';
 
 import HamburgerIcon from '@/assets/utilitary/menu-hamburguer.svg'
 import ClosedIcon from '@/assets/utilitary/close.svg'
@@ -9,11 +10,18 @@ import Likeicon from '@/assets/utilitary/like.svg'
 import PerfilIcon from '@/assets/utilitary/profile.svg'
 import ArrowIcon from '@/assets/utilitary/arrow-right.svg'
 
+
 const HamburgerMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const router = useRouter();
+
+  const goToCartPage = () => {
+    router.push('/carrinho');
   };
 
   return (
@@ -32,7 +40,7 @@ const HamburgerMenu: React.FC = () => {
           <div className={styles.headerMenu}>
             <div className={styles.esquerdoMenu}>
               <Image src={Likeicon} alt="Opções" width={30} height={30} />
-              <Image src={CartIcon} alt="Opções" width={30} height={30} />
+              <Image src={CartIcon} onClick={goToCartPage} alt="Opções" width={30} height={30} />
               <Image src={PerfilIcon} alt="Opções" width={30} height={30}/>
             </div>
 
