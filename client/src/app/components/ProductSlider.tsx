@@ -6,9 +6,12 @@ import ProductCard from './ProductCard';
 interface Product {
   id: number;
   name: string;
+  brand: string;
+  color: string;
   description: string;
   price: number;
-  imageUrl: string;
+  tags: string;
+  image_source: string;
 }
 
 interface ProductSliderProps {
@@ -56,7 +59,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
       <span>N produtos</span>
       <Slider {...settings}>
         {products.map((product) => (
-          <ProductCard id={product.id} image={product.imageUrl} name={product.name} description={product.description} price={product.price} />
+          <ProductCard id={product.id} image={`/mock/${product.image_source}`} name={product.name} description={product.description} price={product.price} />
         ))}
       </Slider>
     </div>
