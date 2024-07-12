@@ -1,9 +1,53 @@
+'use client';
 import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import styles from "./Header.module.css";
+import SearchMenu from './SearchMenu';
+import HamburgerMenu from './HamburgerMenu';
+
+import searchIcon from "@/assets/utilitary/search.svg";
+import likeIcon from "@/assets/utilitary/like.svg";
+import cartIcon from "@/assets/utilitary/cart.svg";
+import profileIcon from "@/assets/utilitary/profile.svg";
 
 const Header = () => {
+
+
   return (
-    <header>
+    <header className={styles.header}>
+      <div className={styles.main_bar}>
+        <Link href="/"><h1 className={styles.logo}>GLOW</h1></Link>
+        <div className={styles.search_bar}>
+          <input type="text" placeholder="Buscar" />
+          <div className={styles.button}>
+            <Image className={styles.icon} src={searchIcon} alt="Botão de buscar" />
+          </div>
+        </div>
+        <nav className={styles.options}>
+          <ul>
+            <li><Image src={likeIcon} alt="Itens favoritados" /></li>
+            <li><Image src={cartIcon} alt="Carrinho de compras" /></li>
+            <li><Image src={profileIcon} alt="Meu perfil" /></li>
+          </ul>
+        </nav>
+        
+        <div className={styles.mobile_options}>
+          <SearchMenu searchIcon={searchIcon} />
+          <HamburgerMenu />
+        </div>
+      </div>
+
+      <nav className={styles.filters}>
+        <ul>
+          <li>FACE</li>
+          <li>LÁBIOS</li>
+          <li>OLHOS</li>
+          <li>SOBRANCELHA</li>
+          <li>PALETAS</li>
+          <li>ACESSÓRIOS</li>
+        </ul>
+      </nav>
+
 
     </header>
   );

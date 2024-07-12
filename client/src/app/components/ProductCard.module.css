@@ -1,0 +1,32 @@
+.productCard,
+.otherInfo {
+  display: flex;
+}
+
+.productCard {
+  flex-direction: column;
+  width: 312px;
+  height: 459px;
+  gap: 8px;
+}
+
+.description {
+  font-family: 'Antic Didone';
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.otherInfo {
+  justify-content: space-between;
+}
+
+.favoriteIcon {
+  cursor: pointer;
+}
+
+.price {
+  font-size: 24px;
+}
