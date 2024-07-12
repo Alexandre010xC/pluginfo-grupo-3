@@ -1,11 +1,11 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import styles from './Carrinho.module.css';
-import ItemCarrinho from './ItemCarrinho';
-import { axiosInstance } from '../../../service/Products';
-import CarrinhoVazio from './CarrinhoVazio';
-import OutrosProdutos from '../components/OutrosProdutos';
-import VistoRecentemente from '../components/VistoRecentemente';
+"use client";
+import React, { useEffect, useState } from "react";
+import styles from "./carrinho.module.css";
+import ItemCarrinho from "./itemCarrinho";
+import { axiosInstance } from "../../../service/Products";
+import CarrinhoVazio from "./CarrinhoVazio";
+import OutrosProdutos from "../components/OutrosProdutos";
+import VistoRecentemente from "../components/VistoRecentemente";
 
 interface Product {
   id: number;
@@ -18,10 +18,12 @@ const Carrinho = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await axiosInstance.get<{ products: Product[] }>('/get_cart');
+        const response = await axiosInstance.get<{ products: Product[] }>(
+          "/get_cart",
+        );
         setProducts(response.data.products);
       } catch (error) {
-        console.error('Erro ao buscar carrinho', error);
+        console.error("Erro ao buscar carrinho", error);
       }
     };
 
@@ -44,15 +46,17 @@ const Carrinho = () => {
           <div className={styles.itemCarrinhoContainer}>
             <section className={styles.endereco}>
               <div className={styles.presenteResponsivo}>
-                <input className={styles.checkboxResponsivo} type='checkbox' />
-                <p className={styles.pcepResponsivo}>Este pedido é um presente</p>
+                <input className={styles.checkboxResponsivo} type="checkbox" />
+                <p className={styles.pcepResponsivo}>
+                  Este pedido é um presente
+                </p>
               </div>
 
               <p className={styles.pcep}>Insira o CEP</p>
-              <input className={styles.inputCEP} placeholder='00000-000' />
+              <input className={styles.inputCEP} placeholder="00000-000" />
               <p className={styles.psixteen}>Não sabe o CEP?</p>
               <div className={styles.presente}>
-                <input className={styles.checkbox} type='checkbox' />
+                <input className={styles.checkbox} type="checkbox" />
                 <p className={styles.pcep}>Este pedido é um presente</p>
               </div>
             </section>
@@ -83,8 +87,8 @@ const Carrinho = () => {
           </div>
         </>
       )}
-        <VistoRecentemente />
-        <OutrosProdutos />
+      <VistoRecentemente />
+      <OutrosProdutos />
     </main>
   );
 };

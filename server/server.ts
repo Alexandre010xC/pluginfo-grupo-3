@@ -32,13 +32,15 @@ app.get("/get_products", async (req: Request, res: Response) => {
 app.get("/filter_products", async (req: Request, res: Response) => {
   const name: string | undefined = req.query.name as string | undefined;
   const tags: string | undefined = req.query.tags as string | undefined;
-//<<<<<<< Igor-Spínola
+  //<<<<<<< Igor-Spínola
   //const quantity: number | undefined = req.query.quantity
-    //? parseInt(req.query.quantity as string, 10)
-    //: undefined;
-//=======
-  const quantity: number | undefined = req.query.quantity ? parseInt(req.query.quantity as string, 10) : undefined;
-//>>>>>>> tests
+  //? parseInt(req.query.quantity as string, 10)
+  //: undefined;
+  //=======
+  const quantity: number | undefined = req.query.quantity
+    ? parseInt(req.query.quantity as string, 10)
+    : undefined;
+  //>>>>>>> tests
 
   try {
     const products = await prisma.product.findMany({
@@ -53,18 +55,18 @@ app.get("/filter_products", async (req: Request, res: Response) => {
             tags: {
               contains: tags,
             },
-// <<<<<<< Igor-Spínola
-//           },
-//         ],
-//       },
-//       take: quantity || undefined,
-//     });
-// =======
-          ],
-        },
-        take: quantity || undefined,
-      });
-// >>>>>>> tests
+            // <<<<<<< Igor-Spínola
+          },
+        ],
+      },
+      take: quantity || undefined,
+    });
+    // =======
+    //     ],
+    //   },
+    //   take: quantity || undefined,
+    // });
+    // >>>>>>> tests
 
     res.send({
       message: "products retrieved succesfully",
@@ -72,13 +74,13 @@ app.get("/filter_products", async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.error("Erro ao listar produtos", error);
-// <<<<<<< Priscila-Anjos
-//     res.send({
-//       message: "error when getting product list",
-//     });
-// }
-// })
-// =======
+    // <<<<<<< Priscila-Anjos
+    //     res.send({
+    //       message: "error when getting product list",
+    //     });
+    // }
+    // })
+    // =======
     return res.status(400).send({
       message: "error when getting product list",
     });
@@ -92,19 +94,19 @@ app.get("/get_product/:id", async (req: Request, res: Response) => {
   try {
     const product = await prisma.product.findUnique({
       where: {
-// <<<<<<< Priscila-Anjos
-//         id:id
-//       }
-//     })
+        // <<<<<<< Priscila-Anjos
+        //         id:id
+        //       }
+        //     })
 
-//     if(!product)
-// =======
+        //     if(!product)
+        // =======
         id: id,
       },
     });
 
     if (!product)
-// >>>>>>> tests
+      // >>>>>>> tests
       return res.status(404).send({
         message: "product not found",
       });
@@ -114,17 +116,17 @@ app.get("/get_product/:id", async (req: Request, res: Response) => {
       product: product,
     });
   } catch (error: any) {
-// <<<<<<< Priscila-Anjos
-//       console.error("Erro ao listar o produto", error);
-//       return res.status(500).send({
-//         message: "error when getting product",
-//       });
-// =======
+    // <<<<<<< Priscila-Anjos
+    //       console.error("Erro ao listar o produto", error);
+    //       return res.status(500).send({
+    //         message: "error when getting product",
+    //       });
+    // =======
     console.error("Erro ao listar o produto", error);
     return res.status(500).send({
       message: "error when getting product",
     });
-// >>>>>>> tests
+    // >>>>>>> tests
   }
 });
 
@@ -336,139 +338,133 @@ app.get("/get_favorites", async (req: Request, res: Response) => {
 });
 
 app.put("/add_to_cart/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const id = parseInt(req.params.id);
   try {
     const product = await prisma.product.update({
       where: {
-        id:id
+        id: id,
       },
       data: {
-        in_cart: true
-      }
-    })
+        in_cart: true,
+      },
+    });
     res.send({
       message: "product added to cart succesfully",
       product: product,
     });
   } catch (error: any) {
-      console.error("Erro ao adicionar produto ao carrinho:", error);
-      res.send({
-        message: "error when adding to cart",
-      });
+    console.error("Erro ao adicionar produto ao carrinho:", error);
+    res.send({
+      message: "error when adding to cart",
+    });
   }
-
-})
+});
 
 app.put("/remove_from_cart/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const id = parseInt(req.params.id);
   try {
     const product = await prisma.product.update({
       where: {
-        id:id
+        id: id,
       },
       data: {
-        in_cart: false
-      }
-    })
+        in_cart: false,
+      },
+    });
     res.send({
       message: "product removed from cart succesfully",
       product: product,
     });
   } catch (error: any) {
-      console.error("Erro ao remover produto do carrinho:", error);
-      res.send({
-        message: "error when removing from cart",
-      });
+    console.error("Erro ao remover produto do carrinho:", error);
+    res.send({
+      message: "error when removing from cart",
+    });
   }
-
-})
+});
 
 app.put("/add_to_favorites/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const id = parseInt(req.params.id);
   try {
     const product = await prisma.product.update({
       where: {
-        id:id
+        id: id,
       },
       data: {
-        in_favorites: true
-      }
-    })
+        in_favorites: true,
+      },
+    });
     res.send({
       message: "product added to favorites succesfully",
       product: product,
     });
   } catch (error: any) {
-      console.error("Erro ao adicionar produto aos favoritos:", error);
-      res.send({
-        message: "error when adding to favorites",
-      });
+    console.error("Erro ao adicionar produto aos favoritos:", error);
+    res.send({
+      message: "error when adding to favorites",
+    });
   }
-
-})
+});
 
 app.put("/remove_from_favorites/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const id = parseInt(req.params.id);
   try {
     const product = await prisma.product.update({
       where: {
-        id:id
+        id: id,
       },
       data: {
-        in_favorites: false
-      }
-    })
+        in_favorites: false,
+      },
+    });
     res.send({
       message: "product removed from favorites succesfully",
       product: product,
     });
   } catch (error: any) {
-      console.error("Erro ao remover produto dos favoritos:", error);
-      res.send({
-        message: "error when removing from favorites",
-      });
+    console.error("Erro ao remover produto dos favoritos:", error);
+    res.send({
+      message: "error when removing from favorites",
+    });
   }
-
-})
+});
 
 app.get("/get_cart", async (req: Request, res: Response) => {
-
   try {
     const products = await prisma.product.findMany({
-      where:{
-        in_cart: true
-      }
-    })
+      where: {
+        in_cart: true,
+      },
+    });
     res.send({
       message: "cart retrieved succesfully",
       products: products,
     });
   } catch (error: any) {
-      console.error("Erro ao listar carrinho", error);
-      res.send({
-        message: "error when getting cart",
-      });
+    console.error("Erro ao listar carrinho", error);
+    res.send({
+      message: "error when getting cart",
+    });
   }
-})
+});
 app.get("/get_favorites", async (req: Request, res: Response) => {
-
   try {
     const products = await prisma.product.findMany({
       where: {
-        in_favorites: true
-      }
-    })
+        in_favorites: true,
+      },
+    });
     res.send({
       message: "favorite products retrieved succesfully",
       products: products,
     });
   } catch (error: any) {
-      console.error("Erro ao listar favoritos", error);
-      res.send({
-        message: "error when getting favorites",
-      });
+    console.error("Erro ao listar favoritos", error);
+    res.send({
+      message: "error when getting favorites",
+    });
   }
-})
+});
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
