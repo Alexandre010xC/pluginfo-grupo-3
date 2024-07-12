@@ -12,6 +12,9 @@ interface Product {
   price: number;
   tags: string;
   image_source: string;
+  image_sources: any[];
+  primaryImage: string;
+  secondaryImages: string[]
 }
 
 interface ProductSliderProps {
@@ -19,19 +22,20 @@ interface ProductSliderProps {
 }
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
+  const countProducts = products.length;
   const settings = {
     rows: 3,
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: undefined,
+    slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: false,
           dots: true,
         },
@@ -39,8 +43,8 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
       {
@@ -56,10 +60,10 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
   return (
     <div className={styles.productSlider}>
       <h4>Produtos</h4>
-      <span>N produtos</span>
+      <span>{countProducts} produtos</span>
       <Slider {...settings}>
         {products.map((product) => (
-          <ProductCard id={product.id} image={`/mock/${product.image_source}`} name={product.name} description={product.description} price={product.price} />
+          <ProductCard key={product.id} id={product.id} image={product.primaryImage} name={product.brand} description={product.name} price={product.price} />
         ))}
       </Slider>
     </div>
