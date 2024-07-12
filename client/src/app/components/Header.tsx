@@ -35,6 +35,7 @@ const Header = () => {
           <SearchMenu searchIcon={searchIcon} />
           <HamburgerMenu />
         </div>
+
       </div>
 
       <nav className={styles.filters}>
