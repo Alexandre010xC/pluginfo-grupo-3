@@ -14,9 +14,21 @@ const Products = () => {
   const getData = async () => {
     try {
       const response = await axiosInstance.get(`get_products/`);
-      setProducts(response.data.products);
-      console.log(response.data);
-    } catch (error) {}
+
+      const processedProducts = response.data.products.map((product: any) => {
+        const imageSources = product.image_source.split(', ').map((image: string) => ({ src: `/mock/${image}` }));
+        return {
+          ...product,
+          image_sources: imageSources,
+          primaryImage: imageSources[0]?.src || '',
+          secondaryImages: imageSources.slice(1).map((image: { src: any; }) => image.src),
+        };
+      });
+      
+      setProducts(processedProducts);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
 
   }
 
