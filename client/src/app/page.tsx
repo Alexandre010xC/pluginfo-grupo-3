@@ -17,6 +17,7 @@ import esmaltesImage from '../../public/mock/esmaltes.png';
 import corretivoImage from '../../public/mock/corretivo.png';
 import esponjaImage from '../../public/mock/esponja.png';
 import pofacialImage from '../../public/mock/po-facial.png';
+import ProdutosGeral from "./components/ProdutosGeral";
 
 export default async function Home() {
   const client = createClient();
@@ -56,17 +57,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className={styles.products}>
-        <div className={styles.heading}>
-          <h4>Produtos</h4>
-          <Link href="/products"><span>Ver mais</span></Link>
-        </div>
-        <div className={styles.product_list}>
-          <ProductCard id={id} image={corretivoImage} name={name} description={description} price={price} />
-          <ProductCard id={id} image={corretivoImage} name={name} description={description} price={price} />
-          <ProductCard id={id} image={corretivoImage} name={name} description={description} price={price} />
-        </div>
-      </section>
+      <ProdutosGeral />
     </div>
   );
 }

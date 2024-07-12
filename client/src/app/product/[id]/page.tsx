@@ -13,6 +13,8 @@ import Link from 'next/link';
 //
 import corretivoImage from '../../../../public/mock/corretivo.png';
 import ProductNotFound from '@/app/components/ProductNotFound';
+import OutrosProdutos from '@/app/components/OutrosProdutos';
+import ItemSemelhantes from '@/app/components/ItemSemelhantes';
 //
 
 const Product = () => {
@@ -75,24 +77,34 @@ const Product = () => {
   if(!loading)
     return (
       <div className={styles.mainContent}>
+
         <section className={styles.product}>
+
           <div className={styles.images}>
+
             <div className={styles.secondaryImages}>
               {secondaryImages.map((image, index) => 
                 <img key={index} className={styles.secondaryImage} src={image} alt={product.name} />
               )}
             </div>
-            <img className={styles.primaryImage} src={primaryImage} alt={product.name} />
-          </div>
+
+              <img className={styles.primaryImage} src={primaryImage} alt={product.name} />
+            </div>
 
           <div className={styles.information}>
+
             <div className={styles.main}>
+
               <div className={styles.brandName}>
+
                 <div className={styles.heading}>
-                  <h4>{product.brand}</h4>
+                  <h4 className={styles.desktop}>{product.brand}</h4>
+                  <p className={styles.reponsivo}>{product.brand}</p>
                   <Image className={styles.favoriteIcon} src={favoriteIcon} alt="Favoritar produto" />
                 </div>
+
                 <span className={styles.name}>{product.name}</span>
+
               </div>
 
 
@@ -103,6 +115,7 @@ const Product = () => {
                   )
                 }
               </div>
+
               <span className={styles.price}>R$ {product.price}</span>
             </div>
             
@@ -117,32 +130,9 @@ const Product = () => {
           
         </section>
 
-
-        <section className={styles.similar_itens}>
-          <div className={styles.heading}>
-            <h4>Itens semelhates</h4>
-            <Link href="/products"><span>Ver mais</span></Link>
-          </div>
-          <div className={styles.product_list}>
-            <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
-            <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
-            <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
-          </div>
-        </section>
-
-        <section className={styles.other_products}>
-          <div className={styles.heading}>
-            <h4>Produtos</h4>
-            <Link href="/products"><span>Ver mais</span></Link>
-          </div>
-          <div className={styles.product_list}>
-            <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
-            <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
-            <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
-          </div>
-        </section>
-
-
+        <ItemSemelhantes />
+        <OutrosProdutos />
+        
       </div>
     );
 }

@@ -27,11 +27,13 @@
 
 .information .heading {
   justify-content: space-between;
+  flex-direction: row;
 }
 
 .images {
   gap: 1rem;
 }
+
 .information {
   width: 542px;
   gap: 16px;
@@ -107,4 +109,114 @@
 .colors .colorItem {
   width: 70px;
   height: 70px;
+}
+
+.mainContent{
+  margin-bottom: 56px;
+  margin-top: 32px;
+  width: 100%;
+}
+
+.reponsivo{
+  display: none;
+}
+
+@media (max-width:480px){
+
+  .desktop{
+    display: none;
+  }
+
+  .reponsivo{
+    display: block;
+  }
+
+  .product{
+    align-items: center;
+    width: 90%;
+    margin-bottom: 56px;
+    margin-top: 32px;
+  }
+
+  .mainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:56px;
+    margin-bottom: 56px;
+    padding: 0;
+    width: 100%;
+  }
+
+  .heading {
+    gap: 0;
+    justify-content: space-between;
+    flex-direction: row;
+    font-size: 30px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .information .main .heading {
+    flex-direction: row;
+    gap: 0px;
+  }
+
+  .product {
+    flex-direction: column;
+    justify-content: center;
+  }
+ 
+  /*ESSE SECONDARY IMAGES É PROVISÓRIO PARA FICAR ASSIM*/
+  .secondaryImage {
+    display: none;
+  }
+
+  .primaryImage {
+    height: 303px;
+    width: 234px;
+    align-self: center; 
+  }
+
+  .colors .colorItem {
+    width: 40px;
+    height: 40px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+
+  .information .description {
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .brandName .name {
+    font-size: 24px;
+    text-align: left;
+  }
+
+  .information {
+    gap: 16px;
+    width: 100%;
+    align-items: flex-start; 
+  }
+
+  .information .heading {
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .about .heading {
+    font-size: 16px;
+  }
+
+  .product .information .price {
+    font-size: 32px;
+    justify-content: flex-start;
+    flex-direction: row;
+    text-align: left;
+  }
 }
