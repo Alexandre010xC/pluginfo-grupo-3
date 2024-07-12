@@ -1,6 +1,6 @@
 'use client';
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import styles from "./Header.module.css";
 import SearchMenu from './SearchMenu';
 import HamburgerMenu from './HamburgerMenu';
@@ -11,12 +11,18 @@ import cartIcon from "@/assets/utilitary/cart.svg";
 import profileIcon from "@/assets/utilitary/profile.svg";
 
 const Header = () => {
+  const router = useRouter();
 
+  const goToCartPage = () => {
+    router.push('/carrinho');
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.main_bar}>
-        <Link href="/"><h1 className={styles.logo}>GLOW</h1></Link>
+        <div className={styles.logo} onClick={() => router.push('/')}>
+          <h1 className={styles.logoText}>GLOW</h1>
+        </div>
         <div className={styles.search_bar}>
           <input type="text" placeholder="Buscar" />
           <div className={styles.button}>
@@ -26,7 +32,7 @@ const Header = () => {
         <nav className={styles.options}>
           <ul>
             <li><Image src={likeIcon} alt="Itens favoritados" /></li>
-            <li><Image src={cartIcon} alt="Carrinho de compras" /></li>
+            <li onClick={goToCartPage}><Image src={cartIcon} alt="Carrinho de compras" /></li>
             <li><Image src={profileIcon} alt="Meu perfil" /></li>
           </ul>
         </nav>
@@ -35,6 +41,7 @@ const Header = () => {
           <SearchMenu searchIcon={searchIcon} />
           <HamburgerMenu />
         </div>
+
       </div>
 
       <nav className={styles.filters}>
@@ -47,10 +54,8 @@ const Header = () => {
           <li>ACESSÓRIOS</li>
         </ul>
       </nav>
-
-
     </header>
   );
 }
 
-export default Header
+export default Header;

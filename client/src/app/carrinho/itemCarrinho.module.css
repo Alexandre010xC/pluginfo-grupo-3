@@ -20,10 +20,20 @@
     gap:16px;
 }
 
-.checkboxProduto{
+.responsivoItens{
+    display: none;
+}
+
+input[type="checkbox"].checkboxProduto {
     width: 20px;
     height: 20px;
-}
+
+    accent-color: var(--lilas-400);
+    border: none;
+    border-radius: 0px;
+    background-color: #E7E3E1;
+    cursor: pointer;
+  }
 
 .infoProdutoCarrinho{
     display: flex;
@@ -44,8 +54,18 @@
     font-weight: 400;
 }
 
+.codigoProduto{
+    font-family: Antic Didone;
+    font-size: 20px;
+    font-weight: 400;
+}
+
 .quantidadeProduto{
     display: flex;
+}
+
+.quantidadeProdutoResponsivo{
+    display: none;
 }
 
 .buttonQuantidade{
@@ -67,9 +87,94 @@
 
     background-color: #F1F0EF;
     border: none;
+
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+
+input[type=number].inputQuantidade::-webkit-inner-spin-button, 
+input[type=number].inputQuantidade::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
 
 .figureFavorite{
     width: 50px;
     height: 50px;
+}
+
+@media(max-width: 480px){
+    .carrinhoItens{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap:0;
+    
+        width: 90%;
+        height: auto;
+    }
+
+    h4.tituloResponsivo{
+        margin-top: 32px;
+        margin-bottom: 16px;
+        font-size: 24px;
+    }
+
+    .precoCarrinho{
+        display: none;
+    }
+
+    .precoCarrinhoResponsivo{
+        font-size: 20px;
+    }
+
+    .responsivoItens{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .figureFavorite{
+        display: none;
+    }
+
+    .quantidadeProduto{
+        display: none;
+    }
+    
+    .quantidadeProdutoResponsivo{
+        display: flex;
+        gap:8px;
+
+        margin-bottom: 24px;
+    }
+
+    .buttonQuantidade{
+        width: 25px;
+        height: 25px;
+    
+        font-size: 15px;
+    }
+    
+    .inputQuantidade{
+        width: 25px;
+        height: 25px;
+
+        font-size: 13px;
+    }
+
+    .nomeProduto{
+        font-family: Antic Didone;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    .codigoProduto{
+        display: none;
+    }
+
+    .produtoCarrinho{
+        margin-bottom: 16px;
+    }
+
 }

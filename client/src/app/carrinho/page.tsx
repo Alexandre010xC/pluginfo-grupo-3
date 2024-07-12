@@ -1,53 +1,92 @@
 'use client'
-import styles from './carrinho.module.css';
-import ItemCarrinho from './itemCarrinho';
+import React, { useEffect, useState } from 'react';
+import styles from './Carrinho.module.css';
+import ItemCarrinho from './ItemCarrinho';
+import { axiosInstance } from '../../../service/Products';
+import CarrinhoVazio from './CarrinhoVazio';
+import OutrosProdutos from '../components/OutrosProdutos';
+import VistoRecentemente from '../components/VistoRecentemente';
+
+interface Product {
+  id: number;
+  price: number;
+}
 
 const Carrinho = () => {
+  const [products, setProducts] = useState<Product[]>([]);
 
-    return (
-      <main className={styles.mainCarrinho}>
-        <ItemCarrinho />
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const response = await axiosInstance.get<{ products: Product[] }>('/get_cart');
+        setProducts(response.data.products);
+      } catch (error) {
+        console.error('Erro ao buscar carrinho', error);
+      }
+    };
 
-        <section className={styles.itemCarrinhoContainer}>
-          
-          <section className={styles.endereco}>
-            <p className={styles.pcep}>Insira o CEP</p>
-            <input className={styles.inputCEP} placeholder='00000-000' />
-            <p className={styles.psixteen}>Não sabe o CEP?</p>
-            <div className={styles.presente}>
-              <input className={styles.checkbox} type='checkbox' />
-              <p className={styles.pcep}>Este pedido é um presente</p>
-            </div>
-          </section>
+    fetchCart();
+  }, []);
 
-          <section className={styles.informacoesPedido}>
+  const handleProductsLoaded = (loadedProducts: Product[]) => {
+    setProducts(loadedProducts);
+  };
 
-            <div className={styles.valoresIndividuais}>
-              <p className={styles.hsix}>Frete</p>
-              <p className={styles.hsix}>R$ 00,00</p>
-            </div>
+  const total = products.reduce((acc, product) => acc + product.price, 0);
 
-            <div className={styles.valoresIndividuais}>
-              <p className={styles.hsix}>Produto</p> 
-              <p className={styles.hsix}>R$</p>
-            </div>
+  return (
+    <main className={styles.mainCarrinho}>
+      {products.length === 0 ? (
+        <CarrinhoVazio />
+      ) : (
+        <>
+          <ItemCarrinho onProductsLoaded={handleProductsLoaded} />
+          <div className={styles.itemCarrinhoContainer}>
+            <section className={styles.endereco}>
+              <div className={styles.presenteResponsivo}>
+                <input className={styles.checkboxResponsivo} type='checkbox' />
+                <p className={styles.pcepResponsivo}>Este pedido é um presente</p>
+              </div>
 
-            <div className={styles.valoresIndividuais}>
-              <p className={styles.hsix}>Descontos e adicionais</p>
-              <p className={styles.hsix}>R$ 00,00</p>
-            </div>
+              <p className={styles.pcep}>Insira o CEP</p>
+              <input className={styles.inputCEP} placeholder='00000-000' />
+              <p className={styles.psixteen}>Não sabe o CEP?</p>
+              <div className={styles.presente}>
+                <input className={styles.checkbox} type='checkbox' />
+                <p className={styles.pcep}>Este pedido é um presente</p>
+              </div>
+            </section>
 
-            <div className={styles.total}>
-              <h5>Total</h5>
-              <h5>R$</h5>
-            </div>
+            <section className={styles.informacoesPedido}>
+              <div className={styles.valoresIndividuais}>
+                <p className={styles.hsix}>Frete</p>
+                <p className={styles.hsix}>R$00,00</p>
+              </div>
 
-            <button className={styles.finalButton}>Continuar</button>
+              <div className={styles.valoresIndividuais}>
+                <p className={styles.hsix}>Produto</p>
+                <p className={styles.hsix}>R$ {total.toFixed(2)}</p>
+              </div>
 
-          </section>
-        </section>
-      </main>
-      );
+              <div className={styles.valoresIndividuais}>
+                <p className={styles.hsix}>Descontos e adicionais</p>
+                <p className={styles.hsix}>R$00,00</p>
+              </div>
+
+              <div className={styles.total}>
+                <h5 className={styles.totalH}>Total</h5>
+                <h5 className={styles.totalH}>R$ {total.toFixed(2)}</h5>
+              </div>
+
+              <button className={styles.finalButton}>CONTINUAR</button>
+            </section>
+          </div>
+        </>
+      )}
+        <VistoRecentemente />
+        <OutrosProdutos />
+    </main>
+  );
 };
 
 export default Carrinho;

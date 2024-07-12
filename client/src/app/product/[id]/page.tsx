@@ -13,6 +13,11 @@ import Link from 'next/link';
 //
 import corretivoImage from '../../../../public/mock/corretivo.png';
 import ProductNotFound from '@/app/components/ProductNotFound';
+<!-- <<<<<<< Priscila-Anjos -->
+import OutrosProdutos from '@/app/components/OutrosProdutos';
+import ItemSemelhantes from '@/app/components/ItemSemelhantes';
+<!-- ======= -->
+<!-- >>>>>>> tests -->
 //
 
 const Product = () => {
@@ -75,14 +80,42 @@ const Product = () => {
   if(!loading)
     return (
       <div className={styles.mainContent}>
+<!-- <<<<<<< Priscila-Anjos -->
+
         <section className={styles.product}>
+
           <div className={styles.images}>
+
+<!-- ======= -->
+<!--         <section className={styles.product}> -->
+<!--           <div className={styles.images}> -->
+<!-- >>>>>>> tests -->
             <div className={styles.secondaryImages}>
               {secondaryImages.map((image, index) => 
                 <img key={index} className={styles.secondaryImage} src={image} alt={product.name} />
               )}
             </div>
-            <img className={styles.primaryImage} src={primaryImage} alt={product.name} />
+<!-- <<<<<<< Priscila-Anjos -->
+
+              <img className={styles.primaryImage} src={primaryImage} alt={product.name} />
+            </div>
+
+          <div className={styles.information}>
+
+            <div className={styles.main}>
+
+              <div className={styles.brandName}>
+
+                <div className={styles.heading}>
+                  <h4 className={styles.desktop}>{product.brand}</h4>
+                  <p className={styles.reponsivo}>{product.brand}</p>
+                  <Image className={styles.favoriteIcon} src={favoriteIcon} alt="Favoritar produto" />
+                </div>
+
+                <span className={styles.name}>{product.name}</span>
+
+<!-- ======= -->
+<!--             <img className={styles.primaryImage} src={primaryImage} alt={product.name} />
           </div>
 
           <div className={styles.information}>
@@ -92,17 +125,26 @@ const Product = () => {
                   <h4>{product.brand}</h4>
                   <Image className={styles.favoriteIcon} src={favoriteIcon} alt="Favoritar produto" />
                 </div>
-                <span className={styles.name}>{product.name}</span>
+                <span className={styles.name}>{product.name}</span> -->
+<!-- >>>>>>> tests -->
               </div>
 
 
               <div className={styles.colors}>
                 {
                   product.color.split(', ').map((color:string) =>
-                    <div className={styles.colorItem} style={{backgroundColor: color}}></div>
+<!-- <<<<<<< Priscila-Anjos -->
+                    <div className={styles.colorItem} key={color} style={{backgroundColor: color}}></div>
                   )
                 }
               </div>
+
+<!-- =======
+                    <div className={styles.colorItem} style={{backgroundColor: color}}></div>
+                  )
+                }
+              </div> -->
+<!-- >>>>>>> tests -->
               <span className={styles.price}>R$ {product.price}</span>
             </div>
             
@@ -117,8 +159,12 @@ const Product = () => {
           
         </section>
 
+<!-- <<<<<<< Priscila-Anjos -->
+        <ItemSemelhantes />
+        <OutrosProdutos />
+<!-- ======= -->
 
-        <section className={styles.similar_itens}>
+<!--         <section className={styles.similar_itens}>
           <div className={styles.heading}>
             <h4>Itens semelhates</h4>
             <Link href="/products"><span>Ver mais</span></Link>
@@ -140,8 +186,9 @@ const Product = () => {
             <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
             <ProductCard id={prod_id} image={corretivoImage} name={name} description={description} price={price} />
           </div>
-        </section>
+        </section> -->
 
+<!-- >>>>>>> tests -->
 
       </div>
     );

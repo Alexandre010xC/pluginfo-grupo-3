@@ -108,3 +108,9 @@ img {
 button {
   border: none;
 }
+
+@media(max-width: 480px){
+  main {
+    padding: 0;
+  }
+}

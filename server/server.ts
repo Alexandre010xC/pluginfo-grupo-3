@@ -72,11 +72,19 @@ app.get("/filter_products", async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.error("Erro ao listar produtos", error);
+// <<<<<<< Priscila-Anjos
+//     res.send({
+//       message: "error when getting product list",
+//     });
+// }
+// })
+// =======
     return res.status(400).send({
       message: "error when getting product list",
     });
   }
 });
+// >>>>>>> tests
 
 app.get("/get_product/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
@@ -84,11 +92,19 @@ app.get("/get_product/:id", async (req: Request, res: Response) => {
   try {
     const product = await prisma.product.findUnique({
       where: {
+// <<<<<<< Priscila-Anjos
+//         id:id
+//       }
+//     })
+
+//     if(!product)
+// =======
         id: id,
       },
     });
 
     if (!product)
+// >>>>>>> tests
       return res.status(404).send({
         message: "product not found",
       });
@@ -98,10 +114,17 @@ app.get("/get_product/:id", async (req: Request, res: Response) => {
       product: product,
     });
   } catch (error: any) {
+// <<<<<<< Priscila-Anjos
+//       console.error("Erro ao listar o produto", error);
+//       return res.status(500).send({
+//         message: "error when getting product",
+//       });
+// =======
     console.error("Erro ao listar o produto", error);
     return res.status(500).send({
       message: "error when getting product",
     });
+// >>>>>>> tests
   }
 });
 

@@ -9,6 +9,10 @@ export class Products{
     produtos(){
         return axiosInstance.post('/create_product')
     }
+
+    carrinho(){
+        return axiosInstance.get('/get_cart')
+    }
     
     updateproduto(){
         return axiosInstance.put('/edit_product')
