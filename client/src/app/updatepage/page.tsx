@@ -1,10 +1,66 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { useState, FormEvent, ChangeEvent } from 'react';
-import styles from './CreatePage.module.css';
+import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
+import styles from './UpdatePage.module.css';
 import { axiosInstance } from '../../../service/Products';
 
-const CreatePage = () => {
+interface Produtomake{
+  productId: number
+}
+
+const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
+
+  const [product, setProduct] = useState({
+    name:"",
+    brand:"",
+    price:0,
+    description:"",
+    tags:"",
+    image_source:[],
+    color:[]});
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axiosInstance.get(`/get_product/${productId}`);
+        const data = response.data;
+        setProduct(response.data.product);
+
+        setName(data.product.name);
+        setBrand(data.product.brand);
+        setPrice(data.product.price);
+        setDescription(data.product.description);
+        setTags(data.product.tags);
+
+        const imageSourceArray = data.product.image_source.split(',').map((image_source: string) => image_source.trim());
+
+        const mainImage = `/mock/${imageSourceArray[0]}`;
+        console.log("mainImage", mainImage)
+        setMainPreview(mainImage);
+        const secondaryImages = imageSourceArray.slice(1).map((image: string) => `/mock/${image}`);
+        setSecondaryPreviews(secondaryImages);
+
+        setImage_source(data.product.image_source.split(',').map((image_source: string) => image_source.trim()));
+        setCores(data.product.color.split(',').map((color: string) => color.trim()));
+
+        console.log("imagens do banco de dados:", data.product.image_source);
+        console.log("imagens processadas:", imageSourceArray);
+
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    };
+
+    fetchProductData();
+  }, [productId]);
+
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState<number | "">("");
+  const [description, setDescription] = useState(""); 
+  const [tags, setTags] = useState(""); 
+  const [image_source, setImage_source] = useState<string[]>([]);
+
   //imagens
   const [mainProduct, setMainProduct] = useState<File | null>(null);
   const [mainPreview, setMainPreview] = useState<string | null>(null);
@@ -19,20 +75,19 @@ const CreatePage = () => {
       reader.readAsDataURL(product);
       reader.onloadend = () => {
         setMainPreview(reader.result as string);
-        
-        setImage_source(prevSources => [product.name, ...prevSources.filter(source => source !== product.name)]);
+        setImage_source(prevSources => [product.name, ...prevSources.slice(1)]);
       };
-  
+
       setMainProduct(product);
     }
   };
 
   const handleSecondaryProducts = (event: ChangeEvent<HTMLInputElement>) => {
     const products = Array.from(event.target.files || []);
-    
-    setSecondaryProducts(prevProducts => [...prevProducts, ...products]);
 
-    const productsPreviews = products.map(file => {
+    setSecondaryProducts((prevProducts) => [...prevProducts, ...products]);
+
+    const productsPreviews = products.map((file) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       return new Promise<string>((resolve) => {
@@ -42,11 +97,11 @@ const CreatePage = () => {
       });
     });
 
-    Promise.all(productsPreviews).then(newPreviews => {
-      setSecondaryPreviews(prevPreviews => [...prevPreviews, ...newPreviews]);
+    Promise.all(productsPreviews).then((newPreviews) => {
+      setSecondaryPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
     });
 
-    setImage_source(prevSources => [...prevSources, ...products.map(file => file.name)]);
+    setImage_source((prevSources) => [...prevSources, ...products.map((file) => file.name)]);
   };
 
   //Cores
@@ -64,27 +119,20 @@ const CreatePage = () => {
   };
 
   const addNewColor = () => {
-    setCores([...cores, '#000000']);
+    setCores([...cores,  '#000000']);
   };
-
-  //backend
-  const [name, setName] = useState("");
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState<number | "">("");
-  const [description, setDescription] = useState(""); 
-  const [tags, setTags] = useState(""); 
-  const [image_source, setImage_source] = useState<string[]>([]); 
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!name || !price || !brand || !description || !tags || image_source.length === 0 || cores.length === 0) {
+    if (!name || !price || !brand || !description || !tags || image_source.length === 0 || cores.length === 0 || !mainPreview) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      const dataResponse = await axiosInstance.post('/create_product', {
+      const dataResponse = await axiosInstance.put('/edit_product', {
+        id: productId,
         name: name,
         brand: brand,
         price: price as number,
@@ -94,7 +142,7 @@ const CreatePage = () => {
         color: cores.join(', ')
       });
 
-      console.log("Data posted successfully:", dataResponse.data);
+      console.log("Dados atualizados com sucesso:", dataResponse.data);
       console.log("Form Data:", {
         name,
         brand,
@@ -105,7 +153,7 @@ const CreatePage = () => {
         colors: cores
       });
 
-      alert("Cadastro feito")
+      alert("Atualização feita")
       setName("");
       setBrand("");
       setPrice("");
@@ -113,7 +161,6 @@ const CreatePage = () => {
       setTags("");
       setImage_source([]);
       setCores([]);
-      window.location.reload()
 
     } catch (error) {
       console.error("Error posting data:", error);
@@ -154,9 +201,19 @@ const CreatePage = () => {
     setMainProduct(null);
   };
 
+  const Apagar = async (id: number) => {
+    try {
+      await axiosInstance.delete(`/delete_product/${id}`);
+      alert('Produto deletado com sucesso!');
+      window.location.href = '/products'; 
+    } catch (error) {
+      console.error('Erro ao deletar o produto:', error);
+    }
+  };
+
   return (
     <section className={styles.create}>
-      <h4>Página de criação</h4>
+      <h4>Página de edição</h4>
 
       <form className={styles.createForm} onSubmit={handleSubmit}>
         <div className={styles.left}>
@@ -174,9 +231,18 @@ const CreatePage = () => {
           </div>
 
           <div className={styles.fotossecundarias}>
+            {mainPreview && (
+              <button type="button" className={styles.removeSecondaryButtonresponsivo} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImageSecundariaresponsivo} /></button>
+            )}
+            {!mainPreview && (
+              <>
+                <input type="file" id="main-product" accept="image/*" className={styles.formInput} style={{ display: 'none' }} onChange={handleMainProductChange} />
+                <button type="button" className={styles.uploadButtonSecundariasresponsivo} onClick={() => document.getElementById('main-product')?.click()}> + </button>
+              </>
+            )}
             {secondaryPreviews.map((preview, index) => (
                 <button type="button" className={styles.removeSecondaryButton} key={index} onClick={() => handleRemoveSecondaryImage(index)}><img src={preview} key={index} alt={`Preview Secundária ${index}`} className={styles.previewImageSecundaria} /></button>
-              ))}
+            ))}
             <input type="file" id="secondary-products" accept="image/*" className={styles.formInput} multiple style={{ display: 'none' }} onChange={handleSecondProductChange}/>
             <button type="button" className={styles.uploadButtonSecundarias} onClick={() => document.getElementById('secondary-products')?.click()}> + </button>
           </div>
@@ -211,11 +277,13 @@ const CreatePage = () => {
           <label htmlFor="tags" className={styles.formLabel}>Tags</label>
           <input type="text" id="tags" className={styles.formInput} value={tags} onChange={(e) => setTags(e.target.value)}/>
 
-          <button type="submit" className={styles.formButton}>CRIAR PRODUTO</button>
+          <button type="submit" className={styles.formButton}>EDITAR PRODUTO</button>
+          <button type="button" className={styles.deletebutton} onClick={() => Apagar(productId)}>Apagar Produto</button>
+
         </div>
       </form>
     </section>
   );
 };
 
-export default CreatePage;
+export default UpdatePage;

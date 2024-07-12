@@ -1,0 +1,113 @@
+.mainCarrinho{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:32px;
+
+    width: 100%;
+    padding: 0px;
+}
+
+.itemCarrinhoContainer{
+    width: 95%;
+    height: 294px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.informacoesPedido{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap:16px;
+}
+
+.endereco{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+.presente{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:4.5px;
+    margin-top: 12px;
+}
+
+.valoresIndividuais{
+    display: flex;
+    gap: 64px;
+
+    justify-content: flex-end;
+}
+
+.total{
+    display: flex;
+    gap: 64px;
+
+    justify-content: flex-end;
+}
+
+.hsix{
+    font-size: 24px;
+}
+
+.pcep{
+    font-family: Antic Didone;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.psixteen{
+    font-family: Antic Didone;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.inputCEP{
+    width: 224px;
+    height: 57px;
+
+    background-color: #DCD7D5;
+    border: none;
+
+    padding-left: 16px;
+
+    font-family: Antic Didone;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.inputCEP::placeholder{
+    color: black;
+}
+
+.finalButton{
+    width: 214px;
+    height: 55px;
+    padding: 10px 30px 10px 30px;
+    margin-right: 52px;
+
+    background-color: var(--lilas-400);
+    border: none;
+    cursor: pointer;
+
+    font-family: Zen Antique Soft;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+
+    background-color: #E7E3E1;
+    border: none;
+    cursor: pointer;
+}
+
