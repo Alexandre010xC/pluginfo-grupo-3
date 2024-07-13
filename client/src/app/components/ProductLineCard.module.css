@@ -2,6 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 359px;
+
+  background-color: #F9F8F7;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.productLineCard h5{
+  font-size: 32px;
+  text-align: center;
 }
 
 .seeMore {
@@ -15,4 +26,18 @@
 
 .productLineCard button {
   cursor: pointer;
+}
+
+@media(max-width:480px){
+  .productLineCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    width: 100%;
+  
+    background-color: #F9F8F7;
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
 }

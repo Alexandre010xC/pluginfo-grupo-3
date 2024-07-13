@@ -7,12 +7,14 @@ import { PrismicNextImage } from "@prismicio/next";
 import styles from './page.module.css'
 import Link from "next/link";
 
-import BrandsSlider from "./components/BrandsSlider";
+import esmaltesImage from '../../public/mock/esmaltes.png';
 import ProdutosGeral from "./components/ProdutosGeral";
+import ProductLineCard from "./components/ProductLineCard";
 
 const Home: React.FC = async () => {
   const client = createClient();
   const banner = await client.getSingle("home");
+  const name = "MAC";
 
   return (
     <div className={styles.mainContent}>
@@ -32,12 +34,15 @@ const Home: React.FC = async () => {
         <div className={styles.heading}>
           <h4>Confira também</h4>
         </div>
-
-          {/* <BrandsSlider /> */}
-
+        <div className={styles.product_list}>
+          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+          <Link href="/products/?name=Fenty" className={styles.noReponsive}><ProductLineCard image={esmaltesImage} name={name} /></Link>
+          <Link href="/products/?name=Fenty"className={styles.noReponsive}><ProductLineCard image={esmaltesImage} name={name} /></Link>
+        </div>
       </section>
 
-      <ProdutosGeral />
+      <section className={styles.ProdutosGeral}><ProdutosGeral /></section>
+      
     </div>
   );
 }

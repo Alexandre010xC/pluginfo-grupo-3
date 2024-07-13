@@ -12,7 +12,7 @@ interface ProductLineCardProp {
 const ProductLineCard: React.FC<ProductLineCardProp> = ({image, name}) => {
   return (
     <div className={styles.productLineCard}>
-      <h5>{name}</h5>
+      <h5>Linha  Locked Kiss INK da MAC</h5>
       <Image className={styles.image} src={image} alt={name} />
       <button className={styles.seeMore}>Confira</button>
     </div>

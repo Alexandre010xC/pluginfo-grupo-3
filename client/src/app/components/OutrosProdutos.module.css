@@ -84,6 +84,7 @@
 
     .products{
         width: 90%;
+        margin: auto;
     }
 
     .normal{display: none;}
