@@ -33,7 +33,7 @@ const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
       </div>
       {isSearchOpen && (
         <div className={styles.searchBar}>
-          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." onChange={handleInputChange} onKeyDown={searchFor}/>
+          <input className={styles.inputsearch}type="text" placeholder="Buscar" onChange={handleInputChange} onKeyDown={searchFor}/>
         </div>
       )}
     </div>

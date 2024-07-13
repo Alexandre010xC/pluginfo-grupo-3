@@ -30,14 +30,28 @@
 
 @media(max-width:480px){
   .productLineCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    width: 100%;
+    width: 90%;
+    margin: auto;
   
     background-color: #F9F8F7;
-    padding-top: 26px;
-    padding-bottom: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .productLineCard h5{
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .seeMore {
+    width: 98px;
+    height: 43px;
+    padding: 0;
+    
+    font-family: Zen Antique Soft;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    text-align: center;
   }
 }

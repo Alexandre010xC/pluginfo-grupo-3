@@ -26,6 +26,15 @@
 .inputsearch{
   height: 25px;
   width: 100%;
+
+  border: none;
+  background-color: #F1F0EF;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  font-family: Antic Didone;
+  font-weight: 400;
+
 }
 
 }
