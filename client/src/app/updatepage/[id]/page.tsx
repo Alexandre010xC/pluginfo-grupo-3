@@ -2,13 +2,15 @@
 'use client'
 import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import styles from './UpdatePage.module.css';
-import { axiosInstance } from '../../../service/Products';
+import { axiosInstance } from '../../../../service/Products';
+import { useParams } from 'next/navigation';
+import ProductNotFound from '../../components/ProductNotFound';
 
-interface Produtomake{
-  productId: number
-}
-
-const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
+const UpdatePage = () => {
+  const params = useParams();
+  const { id } = params as { id: string };
+  const [notFound, setNotFound] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [product, setProduct] = useState({
     name:"",
@@ -22,7 +24,10 @@ const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axiosInstance.get(`/get_product/${productId}`);
+        const response = await axiosInstance.get(`/get_product/${id}`);
+
+        console.log(response.data);
+
         const data = response.data;
         setProduct(response.data.product);
 
@@ -46,13 +51,15 @@ const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
         console.log("imagens do banco de dados:", data.product.image_source);
         console.log("imagens processadas:", imageSourceArray);
 
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching product data:", error);
+        setNotFound(true);
       }
     };
 
     fetchProductData();
-  }, [productId]);
+  }, []);
 
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
@@ -132,7 +139,7 @@ const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
 
     try {
       const dataResponse = await axiosInstance.put('/edit_product', {
-        id: productId,
+        id: id,
         name: name,
         brand: brand,
         price: price as number,
@@ -211,79 +218,83 @@ const UpdatePage: React.FC<Produtomake> = ({ productId }) => {
     }
   };
 
-  return (
-    <section className={styles.create}>
-      <h4>Página de edição</h4>
+  
+  if (notFound) return <ProductNotFound />;
 
-      <form className={styles.createForm} onSubmit={handleSubmit}>
-        <div className={styles.left}>
+  if (!loading)
+    return (
+      <section className={styles.create}>
+        <h4>Página de edição</h4>
 
-          <div className={styles.fotoprincipal}>
-            {mainPreview && (
-              <button type="button" className={styles.removeSecondaryButton} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImagePrincipal} /></button>
-            )}
-            {!mainPreview && (
-              <>
-                <input type="file" id="main-product" accept="image/*" className={styles.formInput} style={{ display: 'none' }} onChange={handleMainProductChange} />
-                <button type="button" className={styles.uploadButtonPrincipal} onClick={() => document.getElementById('main-product')?.click()}> + </button>
-              </>
-            )}
+        <form className={styles.createForm} onSubmit={handleSubmit}>
+          <div className={styles.left}>
+
+            <div className={styles.fotoprincipal}>
+              {mainPreview && (
+                <button type="button" className={styles.removeSecondaryButton} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImagePrincipal} /></button>
+              )}
+              {!mainPreview && (
+                <>
+                  <input type="file" id="main-product" accept="image/*" className={styles.formInput} style={{ display: 'none' }} onChange={handleMainProductChange} />
+                  <button type="button" className={styles.uploadButtonPrincipal} onClick={() => document.getElementById('main-product')?.click()}> + </button>
+                </>
+              )}
+            </div>
+
+            <div className={styles.fotossecundarias}>
+              {mainPreview && (
+                <button type="button" className={styles.removeSecondaryButtonresponsivo} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImageSecundariaresponsivo} /></button>
+              )}
+              {!mainPreview && (
+                <>
+                  <input type="file" id="main-product" accept="image/*" className={styles.formInput} style={{ display: 'none' }} onChange={handleMainProductChange} />
+                  <button type="button" className={styles.uploadButtonSecundariasresponsivo} onClick={() => document.getElementById('main-product')?.click()}> + </button>
+                </>
+              )}
+              {secondaryPreviews.map((preview, index) => (
+                  <button type="button" className={styles.removeSecondaryButton} key={index} onClick={() => handleRemoveSecondaryImage(index)}><img src={preview} key={index} alt={`Preview Secundária ${index}`} className={styles.previewImageSecundaria} /></button>
+              ))}
+              <input type="file" id="secondary-products" accept="image/*" className={styles.formInput} multiple style={{ display: 'none' }} onChange={handleSecondProductChange}/>
+              <button type="button" className={styles.uploadButtonSecundarias} onClick={() => document.getElementById('secondary-products')?.click()}> + </button>
+            </div>
+
           </div>
 
-          <div className={styles.fotossecundarias}>
-            {mainPreview && (
-              <button type="button" className={styles.removeSecondaryButtonresponsivo} onClick={handleRemoveMainImage}><img src={mainPreview} alt="Preview Principal" className={styles.previewImageSecundariaresponsivo} /></button>
-            )}
-            {!mainPreview && (
-              <>
-                <input type="file" id="main-product" accept="image/*" className={styles.formInput} style={{ display: 'none' }} onChange={handleMainProductChange} />
-                <button type="button" className={styles.uploadButtonSecundariasresponsivo} onClick={() => document.getElementById('main-product')?.click()}> + </button>
-              </>
-            )}
-            {secondaryPreviews.map((preview, index) => (
-                <button type="button" className={styles.removeSecondaryButton} key={index} onClick={() => handleRemoveSecondaryImage(index)}><img src={preview} key={index} alt={`Preview Secundária ${index}`} className={styles.previewImageSecundaria} /></button>
-            ))}
-            <input type="file" id="secondary-products" accept="image/*" className={styles.formInput} multiple style={{ display: 'none' }} onChange={handleSecondProductChange}/>
-            <button type="button" className={styles.uploadButtonSecundarias} onClick={() => document.getElementById('secondary-products')?.click()}> + </button>
+          <div className={styles.right}>
+            <label htmlFor="marca" className={styles.formLabel}>Marca</label>
+            <input type="text" id="marca" className={styles.formInputMarca} value={brand} onChange={(e) => setBrand(e.target.value)}/>
+
+            <label htmlFor="nome" className={styles.formLabel}>Nome</label>
+            <input type="text" id="nome" className={styles.formInput} value={name} onChange={(e) => setName(e.target.value)}/>
+
+            <label htmlFor="variacao" className={styles.formLabel}>Variação</label>
+
+            <div className={styles.variacao}>
+              {cores.map((color, index) => (
+                <input key={index} type="color" value={color} className={styles.colorInput} onChange={(e) => handleColor(e, index)} />
+              ))}
+              <button type="button" className={styles.uploadButton} onClick={addNewColor}>+</button>
+            </div>
+
+            <label htmlFor="preco" className={styles.formLabel}>Preço</label>
+            <div className={styles.inputWrapper}>
+              <span className={styles.currency}>R$</span>
+              <input type="number" id="preco" min='0' className={styles.formInputPreco} onChange={(e) => setPrice(parseFloat(e.target.value))} value={price}/>
+            </div>
+
+            <label htmlFor="descricao" className={styles.formLabel}>Descrição</label>
+            <textarea id="descricao" className={styles.formInputDescricao} onChange={(e) => setDescription(e.target.value)} value={description}/>
+
+            <label htmlFor="tags" className={styles.formLabel}>Tags</label>
+            <input type="text" id="tags" className={styles.formInput} value={tags} onChange={(e) => setTags(e.target.value)}/>
+
+            <button type="submit" className={styles.formButton}>EDITAR PRODUTO</button>
+            <button type="button" className={styles.deletebutton} onClick={() => Apagar(parseInt(id))}>Apagar Produto</button>
+
           </div>
-
-        </div>
-
-        <div className={styles.right}>
-          <label htmlFor="marca" className={styles.formLabel}>Marca</label>
-          <input type="text" id="marca" className={styles.formInputMarca} value={brand} onChange={(e) => setBrand(e.target.value)}/>
-
-          <label htmlFor="nome" className={styles.formLabel}>Nome</label>
-          <input type="text" id="nome" className={styles.formInput} value={name} onChange={(e) => setName(e.target.value)}/>
-
-          <label htmlFor="variacao" className={styles.formLabel}>Variação</label>
-
-          <div className={styles.variacao}>
-            {cores.map((color, index) => (
-              <input key={index} type="color" value={color} className={styles.colorInput} onChange={(e) => handleColor(e, index)} />
-            ))}
-            <button type="button" className={styles.uploadButton} onClick={addNewColor}>+</button>
-          </div>
-
-          <label htmlFor="preco" className={styles.formLabel}>Preço</label>
-          <div className={styles.inputWrapper}>
-            <span className={styles.currency}>R$</span>
-            <input type="number" id="preco" min='0' className={styles.formInputPreco} onChange={(e) => setPrice(parseFloat(e.target.value))} value={price}/>
-          </div>
-
-          <label htmlFor="descricao" className={styles.formLabel}>Descrição</label>
-          <textarea id="descricao" className={styles.formInputDescricao} onChange={(e) => setDescription(e.target.value)} value={description}/>
-
-          <label htmlFor="tags" className={styles.formLabel}>Tags</label>
-          <input type="text" id="tags" className={styles.formInput} value={tags} onChange={(e) => setTags(e.target.value)}/>
-
-          <button type="submit" className={styles.formButton}>EDITAR PRODUTO</button>
-          <button type="button" className={styles.deletebutton} onClick={() => Apagar(productId)}>Apagar Produto</button>
-
-        </div>
-      </form>
-    </section>
-  );
+        </form>
+      </section>
+    );
 };
 
 export default UpdatePage;

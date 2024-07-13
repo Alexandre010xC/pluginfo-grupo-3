@@ -1,6 +1,6 @@
 // pages/test-update.tsx
 import React from 'react';
-import UpdatePage from '../updatepage/page';
+import UpdatePage from '../updatepage/[id]/page';
 
 const TestUpdatePage: React.FC = () => {
   // Simula um ID de produto para testar
