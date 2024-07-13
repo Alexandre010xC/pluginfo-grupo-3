@@ -1,20 +1,40 @@
 import { useState } from 'react';
-import Image, { ImageProps } from "next/image";
+import Image from 'next/image';
 import styles from './SearchMenu.module.css';
+import { useRouter } from 'next/navigation';
 
 interface SearchProp {
-  searchIcon: ImageProps['src'];
+  searchIcon: string;
 }
 
-const SearchMenu: React.FC<SearchProp> = ({searchIcon}) => {
-  const [isOpen, setIsOpen] = useState(false);
+const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchName, setSearchName] = useState("");
+  const router = useRouter();
 
-  const toggleOverlay = () => {
-    setIsOpen(!isOpen);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchName(e.target.value);
+  };
+
+  const searchFor = () => {
+    router.push(`/products/?name=${searchName}`);
+  }
+  
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
   return (
-    <Image className={styles.icon} src={searchIcon} onClick={toggleOverlay} alt="Botão de buscar" />
+    <div className={styles.searchMenu}>
+      <div className={styles.searchIcon} onClick={toggleSearch}>
+        <Image src={searchIcon} alt="Botão de buscar" />
+      </div>
+      {isSearchOpen && (
+        <div className={styles.searchBar}>
+          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." onChange={handleInputChange} />
+        </div>
+      )}
+    </div>
   );
 };
 
