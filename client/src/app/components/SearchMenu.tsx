@@ -16,8 +16,10 @@ const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
     setSearchName(e.target.value);
   };
 
-  const searchFor = () => {
-    router.push(`/products/?name=${searchName}`);
+  const searchFor = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      router.push(`/products/?name=${searchName}`);
+    }
   }
   
   const toggleSearch = () => {
@@ -31,7 +33,7 @@ const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
       </div>
       {isSearchOpen && (
         <div className={styles.searchBar}>
-          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." onChange={handleInputChange} />
+          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." onChange={handleInputChange} onKeyDown={searchFor}/>
         </div>
       )}
     </div>
