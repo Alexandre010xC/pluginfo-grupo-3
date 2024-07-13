@@ -57,15 +57,15 @@ const Product = () => {
     }
   }
 
+  const sendToCart = async () => {
+    try {
+      const response = await axiosInstance.put(`/add_to_cart/${id}`);
+      alert("Produto adicionado ao carrinho");
+    } catch(error){
+      console.error("Produto não pode ser adicionado");
+    }
+  }
 
-  //
-
-  const prod_id = 1;
-  const name = "Fenty Beauty";
-  const description = "CORRETIVO FENTY INSTANT RETOUCH CONCEALER";
-  const price = 130;
-
-  //
 
   if (notFound) return <ProductNotFound />;
 
@@ -154,7 +154,7 @@ const Product = () => {
               <p className={styles.description}>{product.description}</p>
             </div>
 
-            <button className={styles.buyNow}>COMPRE AGORA</button>
+            <button className={styles.buyNow} onClick={sendToCart}>COMPRE AGORA</button>
           </div>
         </section>
 
