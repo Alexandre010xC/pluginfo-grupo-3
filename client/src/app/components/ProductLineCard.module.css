@@ -12,3 +12,7 @@
   background-color: var(--lilas-400);
   font-size: 24px;
 }
+
+.productLineCard button {
+  cursor: pointer;
+}

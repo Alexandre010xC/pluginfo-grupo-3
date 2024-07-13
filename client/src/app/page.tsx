@@ -37,7 +37,7 @@ export default async function Home() {
         <div className={styles.content}>
           <h3>{banner.data.title}</h3>
           <PrismicRichText field={banner.data.text} />
-          <button type="button">{banner.data.button_text}</button>
+          <Link className={styles.button} href="/products"><button type="button">{banner.data.button_text}</button></Link>
         </div>
 
         <div>
@@ -50,9 +50,9 @@ export default async function Home() {
           <h4>Confira também</h4>
         </div>
         <div className={styles.product_list}>
-          <ProductLineCard image={esmaltesImage} name={name} />
-          <ProductLineCard image={esmaltesImage} name={name} />
-          <ProductLineCard image={esmaltesImage} name={name} />
+          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
         </div>
       </section>
 

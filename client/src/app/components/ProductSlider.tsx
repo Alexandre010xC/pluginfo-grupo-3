@@ -34,7 +34,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: false,
           dots: true,
@@ -43,14 +43,14 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -59,8 +59,11 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
 
   return (
     <div className={styles.productSlider}>
-      <h4>Produtos</h4>
-      <span>{countProducts} produtos</span>
+      <div>
+        <h4>Produtos</h4>
+        <span>{countProducts} produtos</span>
+      </div>
+      
       <Slider {...settings}>
         {products.map((product) => (
           <ProductCard key={product.id} id={product.id} image={product.primaryImage} name={product.brand} description={product.name} price={product.price} />

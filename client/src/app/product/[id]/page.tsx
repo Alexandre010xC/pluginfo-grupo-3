@@ -32,12 +32,6 @@ const Product = () => {
     try {
       const response = await axiosInstance.get(`/get_product/${id}`);
 
-      console.log(response.status);
-      if(response.status === 404){
-        setNotFound(true);
-        return <ProductNotFound />;
-      }
-
       setProduct(response.data.product);
 
       let secondaryImages: string[] = [""];
@@ -55,7 +49,7 @@ const Product = () => {
 
       setLoading(false)
     } catch (error) {
-      
+      setNotFound(true);
     }
   }
 

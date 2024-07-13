@@ -37,8 +37,7 @@ app.get("/filter_products", async (req: Request, res: Response) => {
   const quantity: number | undefined = req.query.quantity ? parseInt(req.query.quantity as string, 10) : undefined;
 
   try {
-    
-  const products = await prisma.product.findMany({
+    const products = await prisma.product.findMany({
         where: {
           AND: [
             {
@@ -53,7 +52,7 @@ app.get("/filter_products", async (req: Request, res: Response) => {
             },
           ],
         },
-        take: quantity || undefined,
+        take: quantity,
       });
 
     res.send({
@@ -69,7 +68,7 @@ app.get("/filter_products", async (req: Request, res: Response) => {
 })
 
 app.get("/get_product/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const id = parseInt(req.params.id);
 
   try {
     const product = await prisma.product.findUnique({

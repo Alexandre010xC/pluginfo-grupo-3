@@ -13,9 +13,6 @@ const SearchMenu: React.FC<SearchProp> = ({searchIcon}) => {
     setIsOpen(!isOpen);
   };
 
-  const searchFor = () => {
-
-  }
   return (
     <Image className={styles.icon} src={searchIcon} onClick={toggleOverlay} alt="Botão de buscar" />
   );

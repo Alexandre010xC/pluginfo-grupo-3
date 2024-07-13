@@ -9,16 +9,35 @@ import searchIcon from "@/assets/utilitary/search.svg";
 import likeIcon from "@/assets/utilitary/like.svg";
 import cartIcon from "@/assets/utilitary/cart.svg";
 import profileIcon from "@/assets/utilitary/profile.svg";
+import { axiosInstance } from "../../../service/Products";
 
 const Header = () => {
+  const handleSearch = async (search: string) => {
+    try {
+      const response = await axiosInstance.get('filter_products/', {
+        params: {
+          name: search,
+          tags: search,
+        },
+      });
 
+      console.log(response.data);
+      
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleSearch(e.target.value);
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.main_bar}>
         <Link href="/"><h1 className={styles.logo}>GLOW</h1></Link>
         <div className={styles.search_bar}>
-          <input type="text" placeholder="Buscar" />
+          <input type="text" placeholder="Buscar" onChange={handleInputChange} />
           <div className={styles.button}>
             <Image className={styles.icon} src={searchIcon} alt="Botão de buscar" />
           </div>
@@ -39,12 +58,12 @@ const Header = () => {
 
       <nav className={styles.filters}>
         <ul>
-          <li>FACE</li>
-          <li>LÁBIOS</li>
-          <li>OLHOS</li>
-          <li>SOBRANCELHA</li>
-          <li>PALETAS</li>
-          <li>ACESSÓRIOS</li>
+          <Link href='/products/?tags=face'><li>FACE</li></Link>
+          <Link href='/products/?tags=lábios'><li>LÁBIOS</li></Link>
+          <Link href='/products/?tags=olhos'><li>OLHOS</li></Link>
+          <Link href='/products/?tags=sobrancelha'><li>SOBRANCELHA</li></Link>
+          <Link href='/products/?tags=paletas'><li>PALETAS</li></Link>
+          <Link href='/products/?tags=acessorios'><li>ACESSÓRIOS</li></Link>
         </ul>
       </nav>
 
