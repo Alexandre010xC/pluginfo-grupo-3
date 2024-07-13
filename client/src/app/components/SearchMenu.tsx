@@ -1,14 +1,27 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import styles from './SearchMenu.module.css';
+import { useRouter } from 'next/navigation';
 
 interface SearchProp {
-  searchIcon: string; // A propriedade searchIcon é uma string que representa o caminho da imagem
+  searchIcon: string;
 }
 
 const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchName, setSearchName] = useState("");
+  const router = useRouter();
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchName(e.target.value);
+  };
+
+  const searchFor = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      router.push(`/products/?name=${searchName}`);
+    }
+  }
+  
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
@@ -20,7 +33,7 @@ const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
       </div>
       {isSearchOpen && (
         <div className={styles.searchBar}>
-          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." />
+          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." onChange={handleInputChange} onKeyDown={searchFor}/>
         </div>
       )}
     </div>

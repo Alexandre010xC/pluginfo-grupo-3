@@ -17,22 +17,6 @@ const Header = () => {
   const [searchName, setSearchName] = useState("");
   const router = useRouter();
 
-  // const handleSearchName = async (search: string) => {
-  //   try {
-  //     const response = await axiosInstance.get('filter_products/', {
-  //       params: {
-  //         name: search,
-  //         // tags: search,
-  //       },
-  //     });
-
-  //     setSearchName(search);
-      
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchName(e.target.value);
   };
