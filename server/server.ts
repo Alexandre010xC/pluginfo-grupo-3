@@ -44,22 +44,22 @@ app.get("/filter_products", async (req: Request, res: Response) => {
 
   try {
     const products = await prisma.product.findMany({
-        where: {
-          AND: [
-            {
-              name: {
-                contains: name,
-              },
+      where: {
+        AND: [
+          {
+            name: {
+              contains: name,
             },
-            {
-              tags: {
-                contains: tags,
-              },
+          },
+          {
+            tags: {
+              contains: tags,
             },
-          ],
-        },
-        take: quantity,
-      });
+          },
+        ],
+      },
+      take: quantity,
+    });
 
     res.send({
       message: "products retrieved succesfully",
@@ -153,6 +153,7 @@ app.post("/create_product", async (req: Request, res: Response) => {
 app.put("/edit_product", async (req: Request, res: Response) => {
   const { name, brand, price, description, tags, image_source, color, id } =
     req.body;
+  const float_price = price != undefined ? parseFloat(price) : undefined;
   try {
     const product = await prisma.product.update({
       where: {
@@ -161,7 +162,7 @@ app.put("/edit_product", async (req: Request, res: Response) => {
       data: {
         name: name,
         brand: brand,
-        price: parseFloat(price),
+        price: float_price,
         description: description,
         tags: tags,
         image_source: image_source,
