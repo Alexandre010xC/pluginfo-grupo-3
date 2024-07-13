@@ -9,6 +9,7 @@ import CartIcon from '@/assets/utilitary/cart.svg'
 import Likeicon from '@/assets/utilitary/like.svg'
 import PerfilIcon from '@/assets/utilitary/profile.svg'
 import ArrowIcon from '@/assets/utilitary/arrow-right.svg'
+import Link from 'next/link';
 
 
 const HamburgerMenu: React.FC = () => {
@@ -58,30 +59,42 @@ const HamburgerMenu: React.FC = () => {
           
 
           <div className={styles.pagesNav}>
-              <div className={styles.itens}>
-                <p>Face</p>
-                <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
-              </div>
-              <div className={styles.itens}>
-                <p>Lábios</p>
-                <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
-              </div>
-              <div className={styles.itens}>
-                <p>Sobrancelha</p>
-                <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
-              </div>
-              <div className={styles.itens}>
-                <p>Olhos</p>
-                <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
-              </div>
-              <div className={styles.itens}>
-                <p>Paletas</p>
-                <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
-              </div>
-              <div className={styles.itens}>
-                <p>Acessórios</p>
-                <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
-              </div>
+              <Link href='/products/?tags=face' onClick={toggleMenu}>
+                <div className={styles.itens}>
+                  <p>Face</p>
+                  <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
+                </div>
+              </Link>
+              <Link href='/products/?tags=lábios' onClick={toggleMenu}>
+                <div className={styles.itens}>
+                  <p>Lábios</p>
+                  <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
+                </div>
+              </Link>
+              <Link href='/products/?tags=sobrancelha' onClick={toggleMenu}>
+                <div className={styles.itens}>
+                  <p>Sobrancelha</p>
+                  <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
+                </div>
+              </Link>
+              <Link href='/products/?tags=olhos' onClick={toggleMenu}>
+                <div className={styles.itens}>
+                  <p>Olhos</p>
+                  <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
+                </div>
+              </Link>
+              <Link href='/products/?tags=paletas' onClick={toggleMenu}>
+                <div className={styles.itens}>
+                  <p>Paletas</p>
+                  <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
+                </div>
+              </Link>
+              <Link href='/products/?tags=acessorios' onClick={toggleMenu}>
+                <div className={styles.itens}>
+                  <p>Acessórios</p>
+                  <Image src={ArrowIcon} alt="Opções" width={40} height={40} />
+                </div>
+              </Link>
           </div>
         </div>
 
