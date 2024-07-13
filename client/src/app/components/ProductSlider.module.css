@@ -13,6 +13,7 @@
   flex-direction: column;
   gap: 24px;
 }
+
 .information {
   gap: 8px;
 }
@@ -35,4 +36,46 @@
 .productCard p {
   font-size: 1.2em;
   color: #333;
+}
+
+.information span{
+  font-family: Antic Didone;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.04px;
+  text-align: left;
+
+}
+
+@media(max-width:480px){
+
+  .information{
+    margin-top: 32px;
+  }
+
+  .information h4{
+    font-size: 24px;
+  }
+
+  .productSlider {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+
+  .createProduct {
+    width: 161px;
+    height: 43px;
+  }
+
+  .createProduct button {
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 16px;
+    background-color: var(--lilas-400);
+  }
+
 }

@@ -8,6 +8,8 @@
   width: 312px;
   height: auto;
   gap: 8px;
+
+  margin-bottom: 80px;
 }
 
 .description {
@@ -39,7 +41,6 @@
 .editProduct {
   width: 100%;
   height: 55px;
-  padding-bottom: 80px;
   background-color: var(--lilas-400);
   border: none;
 }
@@ -58,6 +59,8 @@
     width: 134px;
     height: auto;
     gap: 8px;
+
+    margin-bottom: 32px;
   }
 
   .productCard h6{
@@ -77,10 +80,17 @@
     height: 20px;
   }
 
-  
+  .editProduct {
+    width: 100%;
+    height: 29px;
+    background-color: var(--lilas-400);
+    border: none;
+  }
+
   .editProduct button {
     width: 100%;
     height: 29px;
+    padding: 0px 6.5px;
     font-size: 13px;
   }
 }

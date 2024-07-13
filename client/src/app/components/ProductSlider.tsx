@@ -63,7 +63,22 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products, admin }) => {
     <div className={styles.productSlider}>
       <div className={styles.heading}>
         <div className={styles.information}>
-          <h4>Produtos</h4>
+          
+
+          {
+            !admin ?
+              (<h4>Produtos</h4>)
+            :
+              ""
+          }
+
+          {
+            admin ?
+              (<h4>Página de edição</h4>)
+            :
+              ""
+          }
+
           <span>{countProducts} produtos</span>
         </div>
           {
