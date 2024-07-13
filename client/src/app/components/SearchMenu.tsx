@@ -1,20 +1,29 @@
 import { useState } from 'react';
-import Image, { ImageProps } from "next/image";
+import Image from 'next/image';
 import styles from './SearchMenu.module.css';
 
 interface SearchProp {
-  searchIcon: ImageProps['src'];
+  searchIcon: string; // A propriedade searchIcon é uma string que representa o caminho da imagem
 }
 
-const SearchMenu: React.FC<SearchProp> = ({searchIcon}) => {
-  const [isOpen, setIsOpen] = useState(false);
+const SearchMenu: React.FC<SearchProp> = ({ searchIcon }) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const toggleOverlay = () => {
-    setIsOpen(!isOpen);
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
   return (
-    <Image className={styles.icon} src={searchIcon} onClick={toggleOverlay} alt="Botão de buscar" />
+    <div className={styles.searchMenu}>
+      <div className={styles.searchIcon} onClick={toggleSearch}>
+        <Image src={searchIcon} alt="Botão de buscar" />
+      </div>
+      {isSearchOpen && (
+        <div className={styles.searchBar}>
+          <input className={styles.inputsearch}type="text" placeholder="Digite sua busca..." />
+        </div>
+      )}
+    </div>
   );
 };
 

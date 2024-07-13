@@ -22,6 +22,12 @@ const HamburgerMenu: React.FC = () => {
 
   const goToCartPage = () => {
     router.push('/carrinho');
+    setIsOpen(false);
+  };
+
+  const goToAdmin = () => {
+    router.push('/admin');
+    setIsOpen(false);
   };
 
   return (
@@ -39,9 +45,9 @@ const HamburgerMenu: React.FC = () => {
 
           <div className={styles.headerMenu}>
             <div className={styles.esquerdoMenu}>
-              <Image src={Likeicon} alt="Opções" width={30} height={30} />
+              <Image src={Likeicon} onClick={goToCartPage} alt="Opções" width={30} height={30} />
               <Image src={CartIcon} onClick={goToCartPage} alt="Opções" width={30} height={30} />
-              <Image src={PerfilIcon} alt="Opções" width={30} height={30}/>
+              <Image src={PerfilIcon} onClick={goToAdmin} alt="Opções" width={30} height={30}/>
             </div>
 
             <button className={styles.toggle_button} onClick={toggleMenu}>
