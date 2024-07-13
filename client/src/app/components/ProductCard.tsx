@@ -10,9 +10,10 @@ interface ProductCardProp {
   name: string;
   description: string;
   price: number;
+  admin: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProp> = ({id, image, name, description, price}) => {
+const ProductCard: React.FC<ProductCardProp> = ({id, image, name, description, price, admin}) => {
   const formatted_price = new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits:2
@@ -31,6 +32,15 @@ const ProductCard: React.FC<ProductCardProp> = ({id, image, name, description, p
           <Image className={styles.favoriteIcon} src={favoriteIcon} alt='Salvar como favorito' />
         </div>
       </div>
+      
+      {
+        admin ?
+          (<div className={styles.admin}>
+            <Link className={styles.editProduct} href={`/updatepage/${id}`}><button>EDITAR PRODUTO</button></Link>
+          </div>)
+        :
+          ""
+      }
     </div>
   );
 };

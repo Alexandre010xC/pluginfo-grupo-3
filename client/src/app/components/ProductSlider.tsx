@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import styles from './ProductSlider.module.css';
 import ProductCard from './ProductCard';
+import Link from 'next/link';
 
 interface Product {
   id: number;
@@ -19,9 +20,10 @@ interface Product {
 
 interface ProductSliderProps {
   products: Product[];
+  admin: boolean;
 }
 
-const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
+const ProductSlider: React.FC<ProductSliderProps> = ({ products, admin }) => {
   const countProducts = products.length;
   const settings = {
     rows: 3,
@@ -59,14 +61,24 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products }) => {
 
   return (
     <div className={styles.productSlider}>
-      <div>
-        <h4>Produtos</h4>
-        <span>{countProducts} produtos</span>
+      <div className={styles.heading}>
+        <div className={styles.information}>
+          <h4>Produtos</h4>
+          <span>{countProducts} produtos</span>
+        </div>
+          {
+            admin ?
+              (<div className={styles.admin}>
+                <Link className={styles.createProduct} href='/createpage'><button>CRIAR PRODUTO</button></Link>
+              </div>)
+            :
+              ""
+          }
       </div>
       
       <Slider {...settings}>
         {products.map((product) => (
-          <ProductCard key={product.id} id={product.id} image={product.primaryImage} name={product.brand} description={product.name} price={product.price} />
+          <ProductCard key={product.id} id={product.id} image={product.primaryImage} name={product.brand} description={product.name} price={product.price} admin={admin} />
         ))}
       </Slider>
     </div>
