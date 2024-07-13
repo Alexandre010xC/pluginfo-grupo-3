@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import styles from "./Header.module.css";
 import SearchMenu from './SearchMenu';
 import HamburgerMenu from './HamburgerMenu';
-import { useRouter } from 'next/navigation';
 
 import searchIcon from "@/assets/utilitary/search.svg";
 import likeIcon from "@/assets/utilitary/like.svg";
@@ -12,6 +11,7 @@ import cartIcon from "@/assets/utilitary/cart.svg";
 import profileIcon from "@/assets/utilitary/profile.svg";
 import { axiosInstance } from "../../../service/Products";
 import { useState } from "react";
+import Link from "next/link";
 
 const Header = () => {
   const [searchName, setSearchName] = useState("");
