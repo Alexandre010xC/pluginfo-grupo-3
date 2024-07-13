@@ -154,10 +154,11 @@ app.put("/edit_product", async (req: Request, res: Response) => {
   const { name, brand, price, description, tags, image_source, color, id } =
     req.body;
   const float_price = price != undefined ? parseFloat(price) : undefined;
+  const int_id = parseInt(id);
   try {
     const product = await prisma.product.update({
       where: {
-        id: id,
+        id: int_id,
       },
       data: {
         name: name,
