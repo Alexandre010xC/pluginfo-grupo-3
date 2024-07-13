@@ -61,7 +61,7 @@ const Header = () => {
           <ul>
             <li><Image src={likeIcon} alt="Itens favoritados" /></li>
             <li onClick={goToCartPage}><Image src={cartIcon} alt="Carrinho de compras" /></li>
-            <li><Image src={profileIcon} alt="Meu perfil" /></li>
+            <li><Image src={profileIcon} alt="Meu perfil" onClick={() => router.push('/admin')} /></li>
           </ul>
         </nav>
         
