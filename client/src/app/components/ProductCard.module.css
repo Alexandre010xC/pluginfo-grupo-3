@@ -6,12 +6,13 @@
 .productCard {
   flex-direction: column;
   width: 312px;
-  height: 459px;
+  height: auto;
   gap: 8px;
 }
 
 .description {
   font-family: 'Antic Didone';
+  height: 48px;
 }
 
 .image {
@@ -31,9 +32,14 @@
   font-size: 24px;
 }
 
+.admin{
+  margin: auto;
+}
+
 .editProduct {
-  width: 271px;
+  width: 100%;
   height: 55px;
+  padding-bottom: 80px;
   background-color: var(--lilas-400);
   border: none;
 }
@@ -44,4 +50,37 @@
   font-size: 24px;
   line-height: 34.75px;
   background-color: var(--lilas-400);
+}
+
+@media(max-width:480px){
+  .productCard {
+    flex-direction: column;
+    width: 134px;
+    height: auto;
+    gap: 8px;
+  }
+
+  .productCard h6{
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .otherInfo span{
+    font-size: 16px;
+  }
+
+  .favoriteIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  
+  .editProduct button {
+    width: 100%;
+    height: 29px;
+    font-size: 13px;
+  }
 }
