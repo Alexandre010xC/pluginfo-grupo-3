@@ -44,29 +44,22 @@ app.get("/filter_products", async (req: Request, res: Response) => {
 
   try {
     const products = await prisma.product.findMany({
-      where: {
-        AND: [
-          {
-            name: {
-              contains: name,
+        where: {
+          AND: [
+            {
+              name: {
+                contains: name,
+              },
             },
-          },
-          {
-            tags: {
-              contains: tags,
+            {
+              tags: {
+                contains: tags,
+              },
             },
-            // <<<<<<< Igor-Spínola
-          },
-        ],
-      },
-      take: quantity || undefined,
-    });
-    // =======
-    //     ],
-    //   },
-    //   take: quantity || undefined,
-    // });
-    // >>>>>>> tests
+          ],
+        },
+        take: quantity,
+      });
 
     res.send({
       message: "products retrieved succesfully",

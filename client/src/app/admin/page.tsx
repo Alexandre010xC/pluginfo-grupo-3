@@ -12,7 +12,6 @@ const Products = () => {
   const tags = params.get('tags');
   const quantity = params.get('quantity');
   const [products,setProducts] = useState<any>([])
-  const admin = false;
 
   useEffect(() => {
     getData();
@@ -49,7 +48,7 @@ const Products = () => {
   }
 
   return (
-    <ProductSlider products={products} admin={admin} />
+    <ProductSlider products={products} admin={true} />
   );
 };
 
