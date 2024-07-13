@@ -5,6 +5,7 @@ import styles from './UpdatePage.module.css';
 import { axiosInstance } from '../../../../service/Products';
 import { useParams } from 'next/navigation';
 import ProductNotFound from '../../components/ProductNotFound';
+import axios from 'axios';
 
 const UpdatePage = () => {
   const params = useParams();
@@ -131,36 +132,32 @@ const UpdatePage = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+  
     if (!name || !price || !brand || !description || !tags || image_source.length === 0 || cores.length === 0 || !mainPreview) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
-
+  
+    const productData = {
+      id: id,
+      name: name,
+      brand: brand,
+      price: price as number,
+      description: description,
+      tags: tags,
+      image_source: image_source.join(', '),
+      color: cores.join(', ')
+    };
+  
+    console.log("Dados do produto a serem enviados:", JSON.stringify(productData, null, 2));
+  
     try {
-      const dataResponse = await axiosInstance.put('/edit_product', {
-        id: id,
-        name: name,
-        brand: brand,
-        price: price as number,
-        description: description,
-        tags: tags,
-        image_source: image_source.join(', '),
-        color: cores.join(', ')
-      });
-
+      const dataResponse = await axiosInstance.put('/edit_product', productData);
+  
       console.log("Dados atualizados com sucesso:", dataResponse.data);
-      console.log("Form Data:", {
-        name,
-        brand,
-        price,
-        description,
-        tags,
-        image_source,
-        colors: cores
-      });
-
-      alert("Atualização feita")
+  
+      alert("Atualização feita");
+  
       setName("");
       setBrand("");
       setPrice("");
@@ -169,10 +166,23 @@ const UpdatePage = () => {
       setImage_source([]);
       setCores([]);
 
+      window.location.href = '/admin'; 
+  
     } catch (error) {
-      console.error("Error posting data:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Error posting data:", error);
+        console.error("Error data:", error.response?.data);
+        console.error("Error status:", error.response?.status);
+        console.error("Error headers:", error.response?.headers);
+  
+        alert(`Erro ao enviar dados: ${error.response?.data.message || 'Verifique os dados enviados'}`);
+      } else {
+        console.error("Unexpected error:", error);
+        alert("Erro inesperado ao enviar dados");
+      }
     }
   };
+  
 
   const handleMainProductChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleMainProduct(e);

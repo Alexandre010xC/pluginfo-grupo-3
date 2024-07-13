@@ -8,16 +8,11 @@ import styles from './page.module.css'
 import Link from "next/link";
 
 import ProductLineCard from "./components/ProductLineCard";
-import ProductCard from "./components/ProductCard";
-
-import axios from 'axios';
 
 import esmaltesImage from '../../public/mock/esmaltes.png';
 
-import corretivoImage from '../../public/mock/corretivo.png';
-import esponjaImage from '../../public/mock/esponja.png';
-import pofacialImage from '../../public/mock/po-facial.png';
 import ProdutosGeral from "./components/ProdutosGeral";
+import Slider from "react-slick";
 
 export default async function Home() {
   const client = createClient();
@@ -28,9 +23,39 @@ export default async function Home() {
   const description = "CORRETIVO FENTY INSTANT RETOUCH CONCEALER";
   const price = 130;
 
-  // const getProducts = () => {
-  //   const response = axios.get('localhost:8080/filter_products')
-  // }
+  const settings = {
+    rows: 3,
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <div className={styles.mainContent}>
@@ -50,10 +75,15 @@ export default async function Home() {
         <div className={styles.heading}>
           <h4>Confira também</h4>
         </div>
+        
+        
+      
         <div className={styles.product_list}>
-          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
-          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
-          <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+          
+            <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+            <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+            <Link href="/products/?name=Fenty"><ProductLineCard image={esmaltesImage} name={name} /></Link>
+          
         </div>
       </section>
 
