@@ -4,24 +4,29 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 import SearchMenu from './SearchMenu';
 import HamburgerMenu from './HamburgerMenu';
+import { useRouter } from 'next/navigation';
 
 import searchIcon from "@/assets/utilitary/search.svg";
 import likeIcon from "@/assets/utilitary/like.svg";
 import cartIcon from "@/assets/utilitary/cart.svg";
 import profileIcon from "@/assets/utilitary/profile.svg";
 import { axiosInstance } from "../../../service/Products";
+import { useState } from "react";
 
 const Header = () => {
-  const handleSearch = async (search: string) => {
+  const [searchName, setSearchName] = useState("");
+  const router = useRouter();
+
+  const handleSearchName = async (search: string) => {
     try {
       const response = await axiosInstance.get('filter_products/', {
         params: {
           name: search,
-          tags: search,
+          // tags: search,
         },
       });
 
-      console.log(response.data);
+      setSearchName(search);
       
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -29,8 +34,12 @@ const Header = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleSearch(e.target.value);
+    handleSearchName(e.target.value);
   };
+
+  const searchFor = () => {
+    router.push(`/products/?name=${searchName}`);
+  }
 
   return (
     <header className={styles.header}>
@@ -38,7 +47,7 @@ const Header = () => {
         <Link href="/"><h1 className={styles.logo}>GLOW</h1></Link>
         <div className={styles.search_bar}>
           <input type="text" placeholder="Buscar" onChange={handleInputChange} />
-          <div className={styles.button}>
+          <div className={styles.button} onClick={searchFor}>
             <Image className={styles.icon} src={searchIcon} alt="Botão de buscar" />
           </div>
         </div>
