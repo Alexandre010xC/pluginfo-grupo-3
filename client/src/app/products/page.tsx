@@ -16,8 +16,9 @@ const Products = () => {
 
   useEffect(() => {
     getData();
+    
   },[name, tags, quantity]);
-
+  
   const getData = async () => {
     try {
       const response = await axiosInstance.get(`filter_products/`, {
