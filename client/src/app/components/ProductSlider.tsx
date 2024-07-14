@@ -31,13 +31,15 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products, admin }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
+    initialSlide: 0,
+    mobileFirst: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           infinite: false,
           dots: true,
         },
@@ -46,14 +48,14 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ products, admin }) => {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         },
       },
     ],

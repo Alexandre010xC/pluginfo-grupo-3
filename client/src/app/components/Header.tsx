@@ -25,6 +25,12 @@ const Header = () => {
     router.push(`/products/?name=${searchName}`);
   }
 
+  const keyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      searchFor();
+    }
+  }
+
   const goToCartPage = () => {
     router.push('/carrinho');
   };
@@ -36,7 +42,7 @@ const Header = () => {
           <h1 className={styles.logoText}>GLOW</h1>
         </div>
         <div className={styles.search_bar}>
-          <input type="text" placeholder="Buscar" onChange={handleInputChange} />
+          <input type="text" placeholder="Buscar" onChange={handleInputChange} onKeyDown={keyDown} />
           <div className={styles.button} onClick={searchFor}>
             <Image className={styles.icon} src={searchIcon} alt="Botão de buscar" />
           </div>
